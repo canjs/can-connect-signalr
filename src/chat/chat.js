@@ -27,6 +27,8 @@ export const ViewModel = DefineMap.extend({
 			return Message.getList();
 		}
 	},
+	name: {},
+	body: {},
 	send(event) {
 		event.preventDefault();
 		new Message({
@@ -39,29 +41,5 @@ export const ViewModel = DefineMap.extend({
 export default Component.extend({
 	tag: 'ccsr-chat',
 	viewModel: ViewModel,
-	events: {
-		inserted: function inserted() {
-			console.log('chat inserted');
-			// If signalR is instantiated before the page loads, then it wreaks havoc on the events
-			// We pass the options in here, when we create the new instance of the Bx
-			// const connection = messageConnection({
-			// 	Map: Message,
-			// 	signalR: {
-			// 		url: 'http://donechatserver20161101024824.azurewebsites.net',
-			// 		name: "Message"
-			// 	}
-			// });
-
-			// connection.getList({}).then((messages) => {
-			// 	this.attr('messages', messages);
-			// });
-			//
-			// connection.signalR.ready.then(function () {
-			// 	this.viewModel.attr('loading', false);
-			// }.bind(this));
-			//
-			// this.viewModel.attr('signalR', connection);
-		}
-	},
 	template
 });
