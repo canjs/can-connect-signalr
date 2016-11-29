@@ -23,7 +23,6 @@ const signalRConnection = connect.behavior('signal-r', function signalR(baseConn
 				const name = signalR.name.toLowerCase();
 
 				signalR.proxy.on(name + "Created", function (item) {
-					console.log(item);
 					context.createInstance(item)
 				});
 				signalR.proxy.on(name + "Updated", function (item) {
@@ -43,9 +42,7 @@ const signalRConnection = connect.behavior('signal-r', function signalR(baseConn
 		},
 		createData: function (props) {
 			return this.signalR.ready.then(function (signalR) {
-				return signalR.proxy.invoke(signalR.name.toLowerCase() + "Create", props.name, props.body).then(function (e) {
-					console.log(e);
-				});
+				return signalR.proxy.invoke(signalR.name.toLowerCase() + "Create", props.name, props.body);
 			})
 		},
 		updateData: function (...props) {
@@ -57,16 +54,12 @@ const signalRConnection = connect.behavior('signal-r', function signalR(baseConn
 			return this.signalR.ready.then(function (signalR) {
 				return signalR.proxy.invoke(signalR.name.toLowerCase() + "Destroy", ...props);
 			});
-			require
 		},
 		getListData: function (...props) {
-			var promise = this.signalR.ready.then(function (signalR) {
-				console.log('SignalR is here...');
+			return this.signalR.ready.then(function (signalR) {
+				// We don't persist any data on the server, so we return a blank set on init.
 				return {data: []};
-
-				// return signalR.proxy.invoke(signalR.name.toLowerCase() + "GetItem", ...props);
 			});
-			return promise;
 		}
 	}
 });

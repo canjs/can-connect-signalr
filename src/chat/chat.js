@@ -8,10 +8,7 @@ export const ViewModel = DefineMap.extend({
 	messages: {
 		get: function (lastSet, resolve) {
 			this.messagesPromise.then(function (messages) {
-				console.log("got messages", messages);
 				resolve(messages)
-			}, function (e) {
-				debugger;
 			});
 		}
 	},
