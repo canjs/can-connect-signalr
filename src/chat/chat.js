@@ -24,13 +24,13 @@ export const ViewModel = DefineMap.extend({
 			return Message.getList();
 		}
 	},
-	name: {},
-	body: {},
+	messageName: {},
+	messageBody: {},
 	send(event) {
 		event.preventDefault();
 		new Message({
-			name: this.name,
-			body: this.body
+			name: this.messageName,
+			body: this.messageBody
 		}).save();
 	}
 });

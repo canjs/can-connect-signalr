@@ -15,11 +15,11 @@ show the messages. Otherwise, display a loading image.-->
 <form class="row chat-form" ($submit)="send(%event)">
     <div class="col-sm-3">
         <input type="text" class="form-control" placeholder="Your name"
-               {($value)}="name"/>
+               {($value)}="messageName"/>
     </div>
     <div class="col-sm-6">
         <input type="text" class="form-control" placeholder="Your message"
-               {($value)}="body"/>
+               {($value)}="messageBody"/>
     </div>
     <div class="col-sm-3">
         <input type="submit" class="btn btn-primary btn-block" value="Send"/>
