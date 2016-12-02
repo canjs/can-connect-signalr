@@ -4,18 +4,18 @@
   "main": "can-connect-signalr",
   "description": "",
   "scripts": {
-      "preversion": "npm test",
-      "version": "git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/",
-      "postversion": "git push --tags && git checkout master && git branch -D release && git push",
-      "testee": "testee test.html --browsers firefox",
-      "test": "npm run jshint && npm run testee",
-      "jshint": "jshint ./*.js --config",
-      "release:pre": "npm version prerelease && npm publish",
-      "release:patch": "npm version patch && npm publish",
-      "release:minor": "npm version minor && npm publish",
-      "release:major": "npm version major && npm publish",
-      "document": "bit-docs",
-      "develop": "done-serve --static --develop --port 8080"
+    "preversion": "npm test",
+    "version": "git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/",
+    "postversion": "git push --tags && git checkout master && git branch -D release && git push",
+    "testee": "testee test.html --browsers firefox",
+    "test": "npm run jshint && npm run testee",
+    "jshint": "jshint ./*.js --config",
+    "release:pre": "npm version prerelease && npm publish",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish",
+    "document": "bit-docs",
+    "develop": "done-serve --static --develop --port 8080"
   },
   "keywords": [],
   "author": "Bitovi, Joe Crick <joe@josephcrick.com> (http://josephcrick.com)",
@@ -26,10 +26,14 @@
     "ms-signalr-client": "^2.2.5"
   },
   "devDependencies": {
-      "jshint": "^2.9.1",
-      "steal": "^0.16.0",
-      "steal-qunit": "^0.1.1",
-      "steal-tools": "^0.16.0",
-      "testee": "^0.2.4"
+    "can-define": "^1.0.4",
+    "jshint": "^2.9.1",
+    "steal": "^0.16.0",
+    "steal-qunit": "^0.1.1",
+    "steal-tools": "^0.16.0",
+    "testee": "^0.2.4"
+  },
+  "system": {
+    "transpiler": "babel"
   }
 }
