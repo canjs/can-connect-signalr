@@ -1,14 +1,15 @@
-import connect from 'can-connect';
-import $ from 'jquery';
-import 'ms-signalr-client';
+var connect = require("can-connect"),
+	$ = require("jquery");
 
-const signalRConnection = connect.behavior('signal-r', function signalR(baseConnection) {
+require('ms-signalr-client');
+
+module.exports = connect.behavior('signal-r', function signalR(baseConnection) {
 	return {
 		init: function () {
 			baseConnection.init.apply(this, arguments);
-			const context = this;
+			var context = this;
 			this.signalR.ready = new Promise(function (resolve, reject) {
-				const signalR = context.signalR;
+				var signalR = context.signalR;
 
 				// There is no official naming standard for SignalR Hub methods that extends beyond
 				// Hub names being PascalCased (server side and client side),a Hub names ending in
@@ -20,16 +21,16 @@ const signalRConnection = connect.behavior('signal-r', function signalR(baseConn
 				// camelCased on the client. There are no naming conventions for actions
 				// defined on the server side. However, we have implemented CUD methods
 				// using the following standards.
-				const name = signalR.name.toLowerCase();
+				var name = signalR.name.toLowerCase();
 
 				signalR.proxy.on(name + "Created", function (item) {
-					context.createInstance(item)
+					context.createInstance(item);
 				});
 				signalR.proxy.on(name + "Updated", function (item) {
-					context.updateInstance(item)
+					context.updateInstance(item);
 				});
 				signalR.proxy.on(name + "Destroyed", function (item) {
-					context.destroyInstance(item)
+					context.destroyInstance(item);
 				});
 
 				signalR.connection.start()
@@ -42,26 +43,24 @@ const signalRConnection = connect.behavior('signal-r', function signalR(baseConn
 		},
 		createData: function (props) {
 			return this.signalR.ready.then(function (signalR) {
-				return signalR.proxy.invoke(signalR.name.toLowerCase() + "Create", props.name, props.body);
-			})
-		},
-		updateData: function (...props) {
-			return this.signalR.ready.then(function (signalR) {
-				return signalR.proxy.invoke(signalR.name.toLowerCase() + "Update", ...props);
+				return signalR.proxy.invoke(signalR.createName || ( signalR.name.toLowerCase() + "Create"), props);
 			});
 		},
-		destroyData: function (...props) {
+		updateData: function (props) {
 			return this.signalR.ready.then(function (signalR) {
-				return signalR.proxy.invoke(signalR.name.toLowerCase() + "Destroy", ...props);
+				return signalR.proxy.invoke(signalR.name.toLowerCase() + "Update", props);
 			});
 		},
-		getListData: function (...props) {
+		destroyData: function (props) {
+			return this.signalR.ready.then(function (signalR) {
+				return signalR.proxy.invoke(signalR.name.toLowerCase() + "Destroy", props);
+			});
+		},
+		getListData: function (set) {
 			return this.signalR.ready.then(function (signalR) {
 				// We don't persist any data on the server, so we return a blank set on init.
-				return {data: []};
+				return signalR.proxy.invoke(signalR.name.toLowerCase() + "GetList", set);
 			});
 		}
-	}
+	};
 });
-
-export default signalRConnection

@@ -1,34 +1,35 @@
 {
-  "name": "ccsr",
-  "version": "1.0.0",
+  "name": "can-connect-signalr",
+  "version": "0.0.1",
+  "main": "can-connect-signalr",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "system": {
-    "main": "app",
-    "directories": {
-      "lib": "src"
-    },
-    "npmAlgorithm": "flat"
+      "preversion": "npm test",
+      "version": "git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/",
+      "postversion": "git push --tags && git checkout master && git branch -D release && git push",
+      "testee": "testee test.html --browsers firefox",
+      "test": "npm run jshint && npm run testee",
+      "jshint": "jshint ./*.js --config",
+      "release:pre": "npm version prerelease && npm publish",
+      "release:patch": "npm version patch && npm publish",
+      "release:minor": "npm version minor && npm publish",
+      "release:major": "npm version major && npm publish",
+      "document": "bit-docs",
+      "develop": "done-serve --static --develop --port 8080"
   },
   "keywords": [],
-  "author": "Joe Crick <joe@josephcrick.com> (http://josephcrick.com)",
-  "license": "ISC",
+  "author": "Bitovi, Joe Crick <joe@josephcrick.com> (http://josephcrick.com)",
+  "license": "MIT",
   "dependencies": {
-    "bootstrap": "^3.3.7",
-    "can": "^3.1.0",
-    "can-component": "^3.0.2",
     "can-connect": "^1.0.12",
-    "can-define": "^1.0.4",
-    "can-util": "^3.0.13",
-    "jquery": "^3.1.1",
-    "ms-signalr-client": "^2.2.5",
-    "steal": "^0.16.43",
-    "steal-stache": "^3.0.1"
+    "jquery": "2.x - 3.x",
+    "ms-signalr-client": "^2.2.5"
   },
   "devDependencies": {
-    "steal": "^0.16.43",
-    "steal-tools": "^0.16.8"
+      "jshint": "^2.9.1",
+      "steal": "^0.16.0",
+      "steal-qunit": "^0.1.1",
+      "steal-tools": "^0.16.0",
+      "testee": "^0.2.4"
   }
 }
