@@ -40,5 +40,10 @@
             
     @option {String} destroyedName
         The name of the event listener your `SignalR` proxy you will use to listen for objects deleted from your hub. 
-        `can-connect-signalr` provides a default name for this method (hub name + "Destoryed"). Use this property 
+        `can-connect-signalr` provides a default name for this method (hub name + "Destroyed"). Use this property 
         to overwrite that name.
+        
+    @option {String} listDataName
+        The name of the event listener your `SignalR` proxy you will use to listen for object lists retrieved from your hub. 
+        `can-connect-signalr` provides a default name for this method (hub name + "ListData"). Use this property 
+        to overwrite that name.        

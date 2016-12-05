@@ -18,7 +18,8 @@ defined on your hub to accept only one parameter. You can pass in multiple value
 an object:
 
 ```js
-// returns a promise that will be resolved once data is returned from the Hub.
+// returns a promise that will be resolved once data is received by the Hub.
+// Note: Data returned from the Hub will be received in the proxy listener.
 myMessageInstance.text = "'Sup!";
 myMessageInstance.save();
 
