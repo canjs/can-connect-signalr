@@ -1,9 +1,7 @@
-@typedef {function} can-connect/connection.createData createData
+@function can-connect-signalr/createData createData
 @parent can-connect-signalr/data-interface
 
-@description Sends an object to the `SignalR` hub to be created.
-
-@option {function}
+@signature `createData(instanceData)`
 
 Invokes the method specified by [can-connect-signalr.signalR].createName or
 [can-connect-signalr.signalR].name+"Create".
@@ -28,5 +26,8 @@ new Message({
 
 While `createData` returns a `Promise`, that promise does not contain an instance of the created object. That 
 will be made available in the associated event listener, `createdData`. 
+
+@param {Set} set.
+@return {Promise<Object>} A promise that resolves to nothing.
 
     

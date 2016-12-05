@@ -1,9 +1,7 @@
-@typedef {function} can-connect/connection.getListData getListData
+@function can-connect-signalr/getListData getListData
 @parent can-connect-signalr/data-interface
 
-@description Requests a set of data from the `SignalR` hub.
-
-@option {function}
+@signature `getListData(set)`
 
 Invokes the method specified by [can-connect-signalr.signalR].getListName or
 [can-connect-signalr.signalR].name+"GetList".
@@ -19,6 +17,5 @@ var listData = connection.getListData().then(function(data) {
 
 ```
 
-  @param {Set} set
-
-    
+@param {Set} set.
+@return {Promise<Object>} A promise that resolves to the list data.

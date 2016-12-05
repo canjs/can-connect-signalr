@@ -1,9 +1,7 @@
-@typedef {function} can-connect/connection.destroyData destroyData
+@function can-connect-signalr/destroyData destroyData
 @parent can-connect-signalr/data-interface
 
-@description Sends an id to the `SignalR` hub to delete an object.
-
-@option {function}
+@signature `destroyData(id)`
 
 Invokes the method specified by [can-connect-signalr.signalR].destroyName or
 [can-connect-signalr.signalR].name+"Destroy".
@@ -27,5 +25,10 @@ myMessageInstance.destroy()
 		
   });
 ```
+
+@param {Set} set.
+@return {Promise<Object>} A promise that resolves to nothing.
+
+
 
     

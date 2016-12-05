@@ -1,9 +1,7 @@
-@typedef {function} can-connect/connection.updateData updateData
+@function can-connect-signalr/updateData updateData
 @parent can-connect-signalr/data-interface
 
-@description Sends an object to the `SignalR` hub to be updated.
-
-@option {function}
+@signature `updateData(instanceData)`
 
 Invokes the method specified by [can-connect-signalr.signalR].updateName or
 [can-connect-signalr.signalR].name+"Update".
@@ -35,3 +33,8 @@ myMessageInstance.save()
 
 While `updateData` returns a `Promise`, that promise does not contain an instance of the updated object. That 
 will be made available in the associated event listener, `updatedData`.
+
+@param {Set} set.
+@return {Promise<Object>} A promise that resolves to nothing.
+
+
