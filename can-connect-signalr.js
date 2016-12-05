@@ -25,7 +25,7 @@ module.exports = connect.behavior('can-connect-signalr', function signalR(baseCo
 					context.destroyInstance(item);
 				});
 				signalR.proxy.on((signalR.listDataName || name + "ListData"), function (item) {
-					context.destroyInstance(item);
+					context.createInstance(item);
 				});
 
 				signalR.connection.start()
