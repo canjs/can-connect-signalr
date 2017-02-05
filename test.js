@@ -73,7 +73,7 @@ QUnit.module('can-connect-signalr', {
 								done: function done(fn) {
 									fn();
 								}
-							}
+							};
 						}
 					};
 				}
