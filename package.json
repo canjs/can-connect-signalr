@@ -20,6 +20,7 @@
   "author": "Bitovi, Joe Crick <joe@josephcrick.com> (http://josephcrick.com)",
   "license": "MIT",
   "dependencies": {
+    "camel-case": "^3.0.0",
     "can-connect": "^1.0.12",
     "jquery": "2.x - 3.x",
     "ms-signalr-client": "^2.2.5"

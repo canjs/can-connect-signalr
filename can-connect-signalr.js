@@ -1,5 +1,6 @@
 var connect = require("can-connect");
 var $ = require("jquery");
+var camelCase = require('camel-case');
 
 require('ms-signalr-client');
 
@@ -38,22 +39,22 @@ module.exports = connect.behavior('can-connect-signalr', function signalR(baseCo
 		},
 		createData: function (props) {
 			return this.signalR.ready.then(function (signalR) {
-				return signalR.proxy.invoke(signalR.createName || (signalR.name.toLowerCase() + "Create"), props);
+				return signalR.proxy.invoke(signalR.createName || (camelCase(signalR.name) + "Create"), props);
 			});
 		},
 		updateData: function (props) {
 			return this.signalR.ready.then(function (signalR) {
-				return signalR.proxy.invoke(signalR.updateName || (signalR.name.toLowerCase() + "Update"), props);
+				return signalR.proxy.invoke(signalR.updateName || (camelCase(signalR.name) + "Update"), props);
 			});
 		},
 		destroyData: function (props) {
 			return this.signalR.ready.then(function (signalR) {
-				return signalR.proxy.invoke(signalR.destroyName || (signalR.name.toLowerCase() + "Destroy"), props);
+				return signalR.proxy.invoke(signalR.destroyName || (camelCase(signalR.name)+ "Destroy"), props);
 			});
 		},
 		getListData: function (set) {
 			return this.signalR.ready.then(function (signalR) {
-				return signalR.proxy.invoke(signalR.getListName || (signalR.name.toLowerCase() + "GetList"), set);
+				return signalR.proxy.invoke(signalR.getListName || (camelCase(signalR.name)+ "GetList"), set);
 			});
 		}
 	};
