@@ -2,15 +2,26 @@
 
 [![Build Status](https://travis-ci.org/canjs/can-connect-signalr.png?branch=master)](https://travis-ci.org/canjs/can-connect-signalr)
 
-The SignalR client library for DoneJS and can-connect
+`can-connect-signalr` is a set of behaviors for integrating [can-connect](http://canjs.com/doc/can-connect.html) with Microsoft's [SignalR](http://signalr.net/).
 
-## Installation
-Install the plugin:
+## Table of Contents
+
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
+- [Making a Build](#making-a-build)
+- [Running the Tests](#running-the-tests)
+
+## Install
+
 ```
 npm install can-connect-signalr --save
 ```
 
 ## Usage
+
+`can-connect-signalr` simplifies the process of connecting to a SignalR Hub, when that Hub conforms to a specific 
+CRUD interface. 
 
 A `can-connect` `connection` is mixed in to the behaviors of a DefineMap. Once mixed in, it provides the map with 
 extra functionality. To use the `connection`, do the following:
@@ -36,6 +47,15 @@ name for the `createData` method would be: `messageCreate`.
 You can overwrite the names of any of the CRUD methods, by setting its corresponding name property. For example,
 to overwrite the method name of the `createData` method, set the `createName` property of the `SignalR` options
 object.
+
+| DataInterface method | SignalR Hub Default Method Name| HTTP method  | Example Path |
+|----------------------|--------------------------------|--------------|--------------|
+| .getListData()       | [prefix]GetList()                 | GET          | /todos       |
+| .createData()        | [prefix]Create()                  | POST         | /todos       |
+| .updateData()        | [prefix]Update()                  | PUT          | /todos/{id}  |
+| .destroyData()       | [prefix]Destroy()                 | DELETE       | /todos/{id}  | 
+
+
 
 NOTE: `can-connect-signalr` requires that the method names you define on your `SignalR` hub accept an object as their
 only parameter. For example, if you were to define a method _on your hub_ for creating instances of an object,
