@@ -5,7 +5,7 @@
   "description": "can-connect-signalr is a set of behaviors for integrating can-connect with Microsoft's signalR",
   "scripts": {
     "preversion": "npm test",
-    "testee": "testee test.html --browsers firefox",
+    "testee": "testee test.html --browsers chrome",
     "test": "npm run jshint && npm run testee",
     "jshint": "jshint ./*.js --config",
     "release:pre": "npm version prerelease && npm publish",
