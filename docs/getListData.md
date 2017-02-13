@@ -13,7 +13,7 @@ what it does with the response:
 // returns a promise that will be resolved once data is received by the Hub.
 // Note: Data returned from the Hub will be received in the proxy listener.
 var listData = connection.getListData().then(function(data) {
-	
+	// do something
 });
 
 ```

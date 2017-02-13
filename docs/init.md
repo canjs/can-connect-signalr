@@ -5,7 +5,7 @@
 
 @option {function}
 
-The `init` method establishes a connection to the `SignalR` hub, and creates a hub proxy. For each CUD method,
+The `init` method establishes a connection to the `SignalR` hub, and creates a hub proxy. For each CRUD method,
 a corresponding event listener is registered on the proxy. For example, `can-connect-signalr` exposes a `createData`
 method. The listener corresponding to that method, by default called `createdData`, is registered on the proxy.
 
