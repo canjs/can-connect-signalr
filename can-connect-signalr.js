@@ -1,9 +1,10 @@
 var connect = require("can-connect");
 var $ = require("jquery");
-// We're not using can-util string.camelize, because it doesn't cover this case. It only works for hyphenated words.
-var camelCase = require('camel-case');
-
 require('ms-signalr-client');
+
+var camelCase = function(str) {
+  return str[0].toLowerCase() + str.substr(1);
+};
 
 module.exports = connect.behavior('can-connect-signalr', function signalR(baseConnection) {
 	return {
