@@ -1,5 +1,4 @@
 var QUnit = require('steal-qunit');
-var clone = require('steal-clone');
 var connect = require('can-connect');
 var dataParse = require('can-connect/data/parse/parse');
 var constructor = require('can-connect/constructor/constructor');
@@ -10,6 +9,53 @@ var realTime = require('can-connect/real-time/real-time');
 var constructorCallbacksOnce = require('can-connect/constructor/callbacks-once/callbacks-once');
 var DefineMap = require('can-define/map/map');
 var DefineList = require('can-define/list/list');
+var signalR = require('./can-connect-signalr');
+var $ = require('jquery');
+
+$.hubConnection = function () {
+	return {
+		id: 2228271782,
+		createHubProxy: function createHubProxy() {
+			return {
+				on: function on() {
+
+				},
+				invoke: function invoke(methodName) {
+					var promise;
+					switch (methodName) {
+						case "messageGetList":
+							promise = new Promise(function (resolve, reject) {
+								resolve([{
+									data: [testData]
+								}]);
+							});
+							break;
+						case "messageUpdate":
+							promise = new Promise(function (resolve, reject) {
+								testData.text = 'Hello!';
+								resolve(testData);
+							});
+							break;
+						default:
+							promise = new Promise(function (resolve, reject) {
+								resolve(testData);
+							});
+							break;
+					}
+
+					return promise;
+				}
+			};
+		},
+		start: function start() {
+			return {
+				done: function done(fn) {
+					fn();
+				}
+			};
+		}
+	};
+};
 
 var Message = DefineMap.extend({
 	text: {
@@ -32,84 +78,28 @@ var testData = {"text": "this", "id": 1};
 
 QUnit.module('can-connect-signalr', {
 
-	beforeEach: function (assert) {
-		var done = assert.async();
+	beforeEach: function () {
 
-		clone({
-			'jquery': {
-				hubConnection: function () {
-					return {
-						id: 2228271782,
-						createHubProxy: function createHubProxy() {
-							return {
-								on: function on() {
+		var behaviors = [
+			dataParse,
+			constructor,
+			constructorStore,
+			canMap,
+			dataCallbacks,
+			realTime,
+			constructorCallbacksOnce,
+			signalR
+		];
 
-								},
-								invoke: function invoke(methodName) {
-									var promise;
-									switch(methodName) {
-										case "messageGetList":
-											promise = new Promise(function (resolve, reject) {
-												resolve([{
-													data: [testData]
-												}]);
-											});
-											break;
-										case "messageUpdate":
-											promise = new Promise(function (resolve, reject) {
-												testData.text = 'Hello!';
-												resolve(testData);
-											});
-											break;
-										default:
-											promise = new Promise(function (resolve, reject) {
-												resolve(testData);
-											});
-											break;
-									}
+		Message.connection = connect(behaviors, {
+			Map: Message,
+			List: Message.List,
+			signalR: {
+				url: 'http://test.com',
+				name: 'Message'
+			}
+		});
 
-									return promise;
-								}
-							};
-						},
-						start: function start() {
-							return {
-								done: function done(fn) {
-									fn();
-								}
-							};
-						}
-					};
-				}
-			},
-			'ms-signalr-client': {}
-		})
-			.import('./can-connect-signalr')
-			.then(function (signalR) {
-
-				var behaviors = [
-					dataParse,
-					constructor,
-					constructorStore,
-					canMap,
-					dataCallbacks,
-					realTime,
-					constructorCallbacksOnce,
-					signalR
-				];
-
-				Message.connection = connect(behaviors, {
-					Map: Message,
-					List: Message.List,
-					signalR: {
-						url: 'http://test.com',
-						name: 'Message'
-					}
-				});
-
-				done();
-
-			});
 	}
 });
 
@@ -155,15 +145,15 @@ QUnit.test('update', function (assert) {
 	});
 });
 
-QUnit.test('destroy', function(assert){
+QUnit.test('destroy', function (assert) {
 	var done = assert.async();
 
 	var message = new Message({
 		text: 'Hi there!'
 	});
-	message.save().then(function(msg){
+	message.save().then(function (msg) {
 		var id = msg._id;
-		msg.destroy().then(function(res){
+		msg.destroy().then(function (res) {
 			assert.equal(res._id, id, 'deleted the instance');
 			done();
 		});
