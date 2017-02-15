@@ -1,6 +1,9 @@
 var connect = require("can-connect");
 var $ = require("jquery");
-require('ms-signalr-client');
+try {
+  require('ms-signalr-client');
+} catch (e) {
+}
 
 var camelCase = function(str) {
   return str[0].toLowerCase() + str.substr(1);
