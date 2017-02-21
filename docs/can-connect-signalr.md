@@ -4,32 +4,53 @@
 @group can-connect-signalr/data-interface data interface
 @group can-connect-signalr/options options
 
-@description Connect to a [Hub]() on a [SignalR]() server.
+@description Connect to a 
+[Hub](https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-server) on a 
+[SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) server.
 
 @signature `connectSignalR( baseBehavior )`
 
 Encapsulates connecting to a `SignalR` hub, by:
- - implementing the [can-connect-signalr/createData], [], [] [can-connect/DataInterface] methods to 
-   make RPC calls to the server.
- - listening for [can-connect-signalr.signalR]`.createdName`, ... messages and calling 
-   [can-connect/real-time/real-time.createInstance], ....
+ - implementing the:
+   - [can-connect-signalr/createData], 
+   - [can-connect-signalr/updateData], 
+   - [can-connect-signalr/getData],
+   - [can-connect-signalr/getListData],
+   - [can-connect-signalr/destroyData]
+   [can-connect/DataInterface] methods to make RPC calls to the server.
+ - listening for:
+   - [can-connect-signalr.signalR]`.createdName`, 
+   - [can-connect-signalr.signalR]`.updatedName`,
+   - [can-connect-signalr.signalR]`.destroyedName`,
+   - [can-connect-signalr.signalR]`.listDataName`,
+   - [can-connect-signalr.signalR]`.dataName`
+   messages and calling 
+   - [can-connect/real-time/real-time.createInstance],
+   - [can-connect/real-time/real-time.updateInstance],
+   - [can-connect/real-time/real-time.destroyInstance]
 
 @body
 
 ## Use
 
-`can-connect-signalr` is a `can-connect` behavior that makes a [connection] connect to a 
-[Hub]() on a [SignalR]() server. This is done by adding the behavior to the connection 
-and configurating as follows:
+`can-connect-signalr` is a `can-connect` behavior that makes a [connection] that can communicate with a 
+[Hub](https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-server) on a 
+[SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) server. This is done by adding the `signalR` 
+behavior to the connection and configuring as follows:
 
 ```js
-var Message = DefineMap.extend({ .. })
-
-connect([],{
-  signalR: {
-    
-  }
-})
+var connect = require("can-connect");
+var signalRConnection = connect([
+  	require("can-connect/constructor/constructor"), 
+  	require('can-connect/constructor/callbacks-once/callbacks-once'),
+  	require('can-connect/real-time/real-time'),
+    require('./signalr') // Add SignalR Behavior
+],{
+    signalR: {
+        url: 'http://test.com', // URL of the SignalR server
+        name: 'Message' // Name of the SignalR hub
+    }
+});
 ```
 
 This makes it so:
@@ -37,13 +58,7 @@ This makes it so:
 `Message.getList({})` makes an RPC call to `SOMETHIGN` and that needs to send back.
 // TODO: Most basic setup, and what the user needs to do around that. Clearly identify the I/O of the service, and
 what should be expected. Main CRUD methods, and push out the other methods. If we have messages data
-on our server, this is how we'd setup the connection, this is what hte server would have to look like, &c.
-
-// TODO: Put the `signalR` page into an options section (options header)
-
-
-
-// TODO: Update with `can-connect` use.
+on our server, this is how we'd setup the connection, this is what the server would have to look like, &c.
 
 
 A `can-connect` `connection` is to the behaviors of a DefineMap. Once mixed in, it provides the map with 
@@ -105,8 +120,6 @@ var Message = DefineMap.extend({
 Message.List = DefineList.extend({
 	Map: Message
 }, {});
-
-// TODO: Require the Bx inline
 
 var behaviors = [
 		require('can-connect/constructor/constructor'),

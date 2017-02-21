@@ -7,7 +7,7 @@ Invokes the method specified by [can-connect-signalr.signalR].createName or
 [can-connect-signalr.signalR].name+"Create".
 
 // TODO: Talk about how things need to be wired up to work correctly. Don't focus on the Model.save
-// TODO: GetData
+
 
 You can call this method directly off of a connection,
 
