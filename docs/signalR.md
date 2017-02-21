@@ -4,17 +4,11 @@
 @description The options object passed to the `can-connect` factory function that generates the 
 `can-connect-signalr` connection.
 
+
 @type {Object}
 
-    @option {String} url
-    The url of your `SignalR` hub.
-
-    @option {String} name
-    The name of your `SignalR` hub.
+Below is an example of a fully configured signalR options object:
     
-    Below is an example of a fully configured signalR options object:
-    
-    ```js
     signalR: {
         url: 'http://test.com',
         name: 'Message',
@@ -29,8 +23,13 @@
         getName: 'wannaWanna',
         dataName: 'gotIt'
     }
-    ```
 
+    @option {String} url
+    The url of your `SignalR` hub.
+
+    @option {String} name
+    The name of your `SignalR` hub.
+    
     @option {String} createName
     The name of the method on your `SignalR` hub you will use to create object instances. `can-connect-signalr`
     provides a default name for this method (hub name + "Create"). Use this property to overwrite that name.

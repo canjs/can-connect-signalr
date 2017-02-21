@@ -92,14 +92,6 @@ To see how this is done, follow the code sample below.
 ```js
 var DefineMap = require('can-define/map/map');
 var DefineList = require('can-define/list/list');
-var dataParse = require('can-connect/data/parse/parse');
-var constructor = require('can-connect/constructor/constructor');
-var constructorStore = require('can-connect/constructor/store/store');
-var canMap = require('can-connect/can/map/map');
-var dataCallbacks = require('can-connect/data/callbacks/callbacks');
-var realTime = require('can-connect/real-time/real-time');
-var constructorCallbacksOnce = require('can-connect/constructor/callbacks-once/callbacks-once');
-var signalr = require('./signalr'); // Import the signalr instance.
 
 var Message = DefineMap.extend({
 	text: {
@@ -117,13 +109,13 @@ Message.List = DefineList.extend({
 // TODO: Require the Bx inline
 
 var behaviors = [
-		constructor,
-		constructorStore,
-		canMap,
-		dataCallbacks,
-		realTime,
-		constructorCallbacksOnce,
-		signalR
+		require('can-connect/constructor/constructor'),
+		require('can-connect/constructor/store/store'),
+		require('can-connect/can/map/map'),
+		require('can-connect/data/callbacks/callbacks'),
+		require('can-connect/real-time/real-time'),
+		require('can-connect/constructor/callbacks-once/callbacks-once'),
+		require('./signalr') // Import the signalR Behavior
 	];
 
 	Message.connection = connect(behaviors, {
