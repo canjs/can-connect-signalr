@@ -2,18 +2,51 @@
 @parent can-ecosystem
 @package ../package.json
 @group can-connect-signalr/data-interface data interface
+@group can-connect-signalr/options options
 
-@description Connect to a hub on a SignalR server.
+@description Connect to a [Hub]() on a [SignalR]() server.
 
 @signature `connectSignalR( baseBehavior )`
 
-Encapsulates connecting to a `SignalR` hub, exposing a set of CRUD methods, and associated event listeners. Each CUD 
-method has a corresponding event listener.
+Encapsulates connecting to a `SignalR` hub, by:
+ - implementing the [can-connect-signalr/createData], [], [] [can-connect/DataInterface] methods to 
+   make RPC calls to the server.
+ - listening for [can-connect-signalr.signalR]`.createdName`, ... messages and calling 
+   [can-connect/real-time/real-time.createInstance], ....
 
 @body
 
 ## Use
-A `can-connect` `connection` is mixed in to the behaviors of a DefineMap. Once mixed in, it provides the map with 
+
+`can-connect-signalr` is a `can-connect` behavior that makes a [connection] connect to a 
+[Hub]() on a [SignalR]() server. This is done by adding the behavior to the connection 
+and configurating as follows:
+
+```js
+var Message = DefineMap.extend({ .. })
+
+connect([],{
+  signalR: {
+    
+  }
+})
+```
+
+This makes it so:
+
+`Message.getList({})` makes an RPC call to `SOMETHIGN` and that needs to send back.
+// TODO: Most basic setup, and what the user needs to do around that. Clearly identify the I/O of the service, and
+what should be expected. Main CRUD methods, and push out the other methods. If we have messages data
+on our server, this is how we'd setup the connection, this is what hte server would have to look like, &c.
+
+// TODO: Put the `signalR` page into an options section (options header)
+
+
+
+// TODO: Update with `can-connect` use.
+
+
+A `can-connect` `connection` is to the behaviors of a DefineMap. Once mixed in, it provides the map with 
 extra functionality. To use the `connection`, do the following:
 
  - First, declare a `DefineMap` constructor function. 
@@ -81,8 +114,9 @@ Message.List = DefineList.extend({
 	Map: Message
 }, {});
 
+// TODO: Require the Bx inline
+
 var behaviors = [
-		dataParse,
 		constructor,
 		constructorStore,
 		canMap,
