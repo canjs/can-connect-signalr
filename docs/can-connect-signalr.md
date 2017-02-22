@@ -38,7 +38,12 @@ Encapsulates connecting to a `SignalR` hub, by:
 [Hub](https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-server) on a 
 [SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) server. 
 
-## `can-connect` Client setup
+## Quick Start
+
+ - `can-connect` Client setup
+ - Hub Interface Requirements
+
+### `can-connect` Client setup
 
 A basic setup of `can-connect-signalr` requires adding the `signalR` behavior to a `can-connection`, as follows:
 
@@ -64,7 +69,7 @@ located at `http://test.com`.
   - Calling any of the Create/Update/Delete methods will affect data on the server. 
   - If the `SignalR` hub is configured correctly (see below), the connection will receive broadcast messages from the `SignalR` hub.
 
-### Hub Interface
+### Hub Interface Requirements
 
 Any `SignalR` hub you will connect to with `can-connect-signalr` must conform to the following interface, where the 
 terms `Item` && `item` should be replaced by your method name prefix:
@@ -117,9 +122,7 @@ public class MyHub : Hub
     }
 ```
 
-// TODO: Most basic setup, and what the user needs to do around that. Clearly identify the I/O of the service, and
-what should be expected. Main CRUD methods, and push out the other methods. If we have messages data
-on our server, this is how we'd setup the connection, this is what the server would have to look like, &c.
+## Further Client Configuration
 
 `can-connect-signalr` provides the following CRUD methods that define an interface to a predefined set of
 `SignalR` proxy methods:
@@ -151,9 +154,12 @@ For example, if the name of the hub were "message", the default name for a liste
 would be `messageCreated`. These, too, can be overwritten. For example, set the `createdName` property of the `SignalR`
 options object to overwrite the default listener name.
 
-Finally, `can-connect-signalr` requires that an `id` field exist on any object returned from a Hub. 
+## Use with CanJS
 
-To see how this is done, follow the code sample below.
+Any `can-connect` connection can be mixed in to a [`DefineMap`](DefineMap). When using `can-connect-signalr` 
+with CanJS `DefineMap`s, notethat an `id` field must exist on any object returned from a Hub. 
+
+To see how this is done, follow the code sample below:
 
 ```js
 var DefineMap = require('can-define/map/map');
