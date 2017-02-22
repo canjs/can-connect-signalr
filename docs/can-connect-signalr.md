@@ -122,7 +122,7 @@ public class MyHub : Hub
     }
 ```
 
-## Further Client Configuration
+## Client Configuration
 
 `can-connect-signalr` provides the following CRUD methods that define an interface to a predefined set of
 `SignalR` proxy methods:
