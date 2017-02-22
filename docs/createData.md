@@ -6,8 +6,6 @@
 Invokes the method specified by [can-connect-signalr.signalR].createName or
 [can-connect-signalr.signalR].name+"Create".
 
-// TODO: Talk about how things need to be wired up to work correctly. Don't focus on the Model.save
-
 ## Setup 
 If your `SignalR` hub conforms to the required interface see [can-connect-signalr], there is nothing you need to 
 do to configure this method on the client. If the method name of the create end point on your `SignalR` hub deviates from
