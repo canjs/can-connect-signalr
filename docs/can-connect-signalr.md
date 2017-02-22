@@ -140,10 +140,10 @@ You can overwrite the names of any of the CRUD methods, by setting its correspon
 to overwrite the method name of the `createData` method, set the `createName` property of the `SignalR` options
 object.
 
-Similarly, `can-connect-signalr` provides default proxy event handler names, for the methods defined to listen for replies
-from a `SignalR` server. `can-connect-signalr` has a limited set of event handlers you can use. The set is limited to
+Similarly, `can-connect-signalr` provides default proxy RPC handler names, for the methods defined to listen for replies
+from a `SignalR` server. `can-connect-signalr` has a limited set of RPC handlers you can use. The set is limited to
 the CUD operations it supports. As with the proxy methods, the listener names default to a combination of the hub name
-and the event name. For example, using `Message` as the Hub name:
+and the RPC name. For example, using `Message` as the Hub name:
 
  - messageCreatedData
  - messageUpdatedData

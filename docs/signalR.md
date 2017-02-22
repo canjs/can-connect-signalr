@@ -35,7 +35,7 @@ Below is an example of a fully configured signalR options object:
     provides a default name for this method (hub name + "Create"). Use this property to overwrite that name.
     
     @option {String} createdName
-    The name of the event listener your `SignalR` proxy you will use to listen for objects created on your hub. 
+    The name of the RPC listener your `SignalR` proxy you will use to listen for objects created on your hub. 
     `can-connect-signalr` provides a default name for this method (hub name + "Created"). Use this property 
     to overwrite that name.
         
@@ -44,7 +44,7 @@ Below is an example of a fully configured signalR options object:
     provides a default name for this method (hub name + "Update"). Use this property to overwrite that name.
      
     @option {String} updatedName
-    The name of the event listener your `SignalR` proxy you will use to listen for objects updated on your hub. 
+    The name of the RPC listener your `SignalR` proxy you will use to listen for objects updated on your hub. 
     `can-connect-signalr` provides a default name for this method (hub name + "Updated"). Use this property 
     to overwrite that name.
     
@@ -53,7 +53,7 @@ Below is an example of a fully configured signalR options object:
     provides a default name for this method (hub name + "Destroy"). Use this property to overwrite that name.
     
     @option {String} destroyedName
-    The name of the event listener your `SignalR` proxy you will use to listen for objects deleted from your hub. 
+    The name of the RPC listener your `SignalR` proxy you will use to listen for objects deleted from your hub. 
     `can-connect-signalr` provides a default name for this method (hub name + "Destroyed"). Use this property 
     to overwrite that name.    
     
@@ -62,7 +62,7 @@ Below is an example of a fully configured signalR options object:
     provides a default name for this method (hub name + "GetList"). Use this property to overwrite that name.
             
     @option {String} listDataName
-    The name of the event listener your `SignalR` proxy you will use to listen for object lists retrieved from your hub. 
+    The name of the RPC listener your `SignalR` proxy you will use to listen for object lists retrieved from your hub. 
     `can-connect-signalr` provides a default name for this method (hub name + "ListData"). Use this property 
     to overwrite that name.    
         
@@ -71,6 +71,6 @@ Below is an example of a fully configured signalR options object:
     provides a default name for this method (hub name + "Get"). Use this property to overwrite that name.
             
     @option {String} dataName
-    The name of the event listener your `SignalR` proxy you will use to listen for objects retrieved from your hub. 
+    The name of the RPC listener your `SignalR` proxy you will use to listen for objects retrieved from your hub. 
     `can-connect-signalr` provides a default name for this method (hub name + "Data"). Use this property 
     to overwrite that name.          

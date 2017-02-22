@@ -3,6 +3,22 @@
 
 @signature `getListData(set)`
 
+
+## Setup 
+If your `SignalR` hub conforms to the required interface see [can-connect-signalr], there is nothing you need to 
+do to configure this method on the client. If the method name of the create end point on your `SignalR` hub deviates from
+the standard expected by `can-connect-signalr`, you can override `can-connect-signalr`'s default naming by providing
+this property with the name expected by your `SignalR` hub.
+
+```js
+    signalR: {
+        url: 'http://test.com', // URL of the SignalR server
+        name: 'Message' // Name of the SignalR hub,
+        getListName: 'nameOfMethod'
+    }
+```
+
+
 Invokes the method specified by [can-connect-signalr.signalR].getListName or
 [can-connect-signalr.signalR].name+"GetList".
 

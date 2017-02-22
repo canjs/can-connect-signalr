@@ -1,7 +1,7 @@
 @function can-connect-signalr.init init
 @parent can-connect-signalr
 
-@description Establishes a connection to the `SignalR` hub, sets up proxy methods and event listeners.
+@description Establishes a connection to the `SignalR` hub, sets up proxy methods and RPC listeners.
 
 @option {function}
 
