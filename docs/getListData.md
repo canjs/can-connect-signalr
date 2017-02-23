@@ -34,5 +34,20 @@ var listData = connection.getListData().then(function(data) {
 
 ```
 
+## CanJS Usage
+
+If your connection is mixed in to a `DefineMap` (see [can-connect-signalr]), `getListData` can be called off of the 
+`DefineMap` constructor function (static). Note that `can-connect-signalr` requires the method signatures
+defined on your hub to accept only one parameter. You can pass in multiple values by sending the method
+an object:
+
+```js
+// Note the method is called `getList`. This is not a typo.
+MessageConstructor.getList()
+  .then(function(response){
+		
+  });
+```
+
 @param {Set} set.
 @return {Promise<Object>} A promise that resolves to the list data.
