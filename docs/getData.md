@@ -1,4 +1,4 @@
-@function can-connect-signalr/getListData getListData
+@function can-connect-signalr/getData getData
 @parent can-connect-signalr/data-interface
 
 @signature `getData(id)`
