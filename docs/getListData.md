@@ -6,7 +6,7 @@
 
 ## Setup 
 If your `SignalR` hub conforms to the required interface (see [can-connect-signalr]), there is nothing you need to 
-do to configure this method on the client. If the method name of the create end point on your `SignalR` hub deviates from
+do to configure this method on the client. If the method name of the `getListData` end point on your `SignalR` hub deviates from
 the standard expected by `can-connect-signalr`, you can override `can-connect-signalr`'s default naming by providing
 this property with the name expected by your `SignalR` hub.
 
