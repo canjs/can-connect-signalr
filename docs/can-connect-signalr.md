@@ -173,7 +173,7 @@ options object to overwrite the default listener name.
 ## Use with CanJS
 
 Any `can-connect` connection can be mixed in to a [`DefineMap`](DefineMap). When using `can-connect-signalr` 
-with CanJS `DefineMap`s, notethat an `id` field must exist on any object returned from a Hub. 
+with `DefineMap`, note that an `id` field must exist on any object returned from a Hub. 
 
 To see how this is done, follow the code sample below:
 
