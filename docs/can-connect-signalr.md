@@ -140,6 +140,14 @@ You can overwrite the names of any of the CRUD methods, by setting its correspon
 to overwrite the method name of the `createData` method, set the `createName` property of the `SignalR` options
 object.
 
+```js
+    signalR: {
+        url: 'http://test.com', 
+        name: 'Message' 
+        createName: 'nameOfMethod'
+    }
+```
+
 Similarly, `can-connect-signalr` provides default proxy RPC handler names, for the methods defined to listen for replies
 from a `SignalR` server. `can-connect-signalr` has a limited set of RPC handlers you can use. The set is limited to
 the CUD operations it supports. As with the proxy methods, the listener names default to a combination of the hub name
@@ -153,6 +161,14 @@ and the RPC name. For example, using `Message` as the Hub name:
 For example, if the name of the hub were "message", the default name for a listener associated with a create event 
 would be `messageCreated`. These, too, can be overwritten. For example, set the `createdName` property of the `SignalR`
 options object to overwrite the default listener name.
+
+```js
+    signalR: {
+        url: 'http://test.com', 
+        name: 'Message' 
+        createdName: 'nameOfMethod'
+    }
+```
 
 ## Use with CanJS
 
