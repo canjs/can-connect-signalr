@@ -83,7 +83,7 @@ public class MyHub : Hub
         {
         }
 
-		// Method should take whatever data is required to create
+		// Method should take whatever data is required to create an instance
         public MessageViewModel ItemCreate(...)
         {
             // Any RPC calls to the client related to creation go here
@@ -91,7 +91,7 @@ public class MyHub : Hub
             return ...;
         }
 
-		// Method should take whatever data to update
+		// Method should take whatever data is required to update an instance
         public MessageViewModel ItemUpdate(...)
         {
             // Any RPC calls to the client related to update go here
@@ -99,7 +99,7 @@ public class MyHub : Hub
             return ...;
         }
 
-		// Method should take whatever data is required to destroy (usually an id)
+		// Method should take whatever data is required to destroy an instance (usually an id)
         public MessageViewModel ItemDestroy()
         {
             // Any RPC calls to the client related to destroy go here
