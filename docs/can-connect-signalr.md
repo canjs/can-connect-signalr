@@ -4,41 +4,38 @@
 @group can-connect-signalr/data-interface data interface
 @group can-connect-signalr/options options
 
-@description Connect to a 
-[Hub](https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-server) on a 
+@description Connect to a
+[Hub](https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-server) on a
 [SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) server.
 
 @signature `connectSignalR( baseBehavior )`
 
 Encapsulates connecting to a `SignalR` hub, by:
- - implementing the:
-   - [can-connect-signalr/createData], 
-   - [can-connect-signalr/updateData], 
-   - [can-connect-signalr/getData],
-   - [can-connect-signalr/getListData],
-   - [can-connect-signalr/destroyData]
-   [can-connect/DataInterface] methods to make RPC calls to the server.
- - listening for:
-   - [can-connect-signalr.signalR]`.createdName`, 
-   - [can-connect-signalr.signalR]`.updatedName`,
-   - [can-connect-signalr.signalR]`.destroyedName`,
-   - [can-connect-signalr.signalR]`.listDataName`,
-   - [can-connect-signalr.signalR]`.dataName`
 
- - messages, and calling:
-   - [can-connect/real-time/real-time.createInstance],
-   - [can-connect/real-time/real-time.updateInstance],
-   - [can-connect/real-time/real-time.destroyInstance]
+- implementing the: [can-connect-signalr/createData],  [can-connect-signalr/updateData], [can-connect-signalr/getData], [can-connect-signalr/getListData], and [can-connect-signalr/destroyData] [can-connect/DataInterface] methods to make RPC calls to the server.
+- listening for the following messages pushed from the server to the browser:
+  - [can-connect-signalr.signalR]`.createdName`,
+  - [can-connect-signalr.signalR]`.updatedName`,
+  - [can-connect-signalr.signalR]`.destroyedName`,
+  - [can-connect-signalr.signalR]`.listDataName`,
+  - [can-connect-signalr.signalR]`.dataName`
+
+  and calling: [can-connect/real-time/real-time.createInstance], [can-connect/real-time/real-time.updateInstance], or [can-connect/real-time/real-time.destroyInstance].
 
 @body
 
-## Summary
+## Use
 
-`can-connect-signalr` is a `can-connect` behavior that makes a [connection] that can communicate with a 
-[Hub](https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-server) on a 
-[SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) server. 
+`can-connect-signalr` is a `can-connect` behavior that makes a connection that can communicate with a
+[Hub](https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-server) on a
+[SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) server.
 
-## Quick Start
+The following walks through an example setup that allows a `Message`
+type to be created, retrieved, updated and deleted by the client AND
+to be notified of when messages are created, updated, or deleted by the
+server.
+
+Specifically, we will detail the:
 
  - `can-connect` Client setup
  - Hub Interface Requirements
@@ -50,53 +47,59 @@ A basic setup of `can-connect-signalr` requires adding the `signalR` behavior to
 ```js
 var connect = require("can-connect");
 var signalRConnection = connect([
-  	require("can-connect/constructor/constructor"), 
+  	require("can-connect/constructor/constructor"),
   	require('can-connect/constructor/callbacks-once/callbacks-once'),
   	require('can-connect/real-time/real-time'),
-    require('./signalr') // Add SignalR Behavior
+    require('can-connect-signalr') // Add SignalR Behavior
 ],{
     signalR: {
         url: 'http://test.com', // URL of the SignalR server
-        name: 'Message' // Name of the SignalR hub
+        name: 'MessageHub' // Name of the SignalR hub
     }
 });
 ```
 
-With this configuration, the `signalRConnection` can make RPC calls to a `SignalR` hub named `Message` 
-located at `http://test.com`. 
+With this configuration, the `signalRConnection` can make RPC calls to a `SignalR` hub named `Message`
+located at `http://test.com`.
 
-  - Calling any of the `get` methods will return data from the server. 
-  - Calling any of the Create/Update/Delete methods will affect data on the server. 
+  - Calling any of the `get` methods will return data from the server.
+  - Calling any of the Create/Update/Delete methods will affect data on the server.
   - If the `SignalR` hub is configured correctly (see below), the connection will receive broadcast messages from the `SignalR` hub.
 
 ### Hub Interface Requirements
 
-Any `SignalR` hub you will connect to with `can-connect-signalr` must conform to the following interface, where the 
+Any `SignalR` hub you will connect to with `can-connect-signalr` must conform to the following interface, where the
 terms `Item` && `item` should be replaced by your method name prefix:
 
 
 ```c-sharp
-public class MyHub : Hub
+public class MessageHub : Hub
     {
 
-        public MyHub(MyRepository repository)
+        public MessageHub(MyRepository repository)
         {
         }
 
 		// Method should take whatever data is required to create an instance
-        public MessageViewModel ItemCreate(...)
+        public MessageModel MessageCreate( MessageModel message )
         {
+            PERSIST_TO_DATABASE( message );
+
+            message.id // type must have a unique id property
+
             // Any RPC calls to the client related to creation go here
-            Clients.All.itemCreated(...);
-            return ...;
+            Clients.All.messageHubCreated(message);
+            return message;
         }
 
 		// Method should take whatever data is required to update an instance
-        public MessageViewModel ItemUpdate(...)
+        public MessageModel messageUpdate( MessageModel message )
         {
+            UPDATE_DATABASE( message );
+
             // Any RPC calls to the client related to update go here
-            Clients.All.itemUpdated(...);
-            return ...;
+            Clients.All.messageHubUpdated(message);
+            return message;
         }
 
 		// Method should take whatever data is required to destroy an instance (usually an id)
@@ -111,7 +114,7 @@ public class MyHub : Hub
         {
             return ...
         }
-        
+
         // Method should take whatever data is required to obtain a specific item
         public Item ItemGet(...)
         {
@@ -131,7 +134,7 @@ public class MyHub : Hub
  - updateData
  - destroyData
  - getList
- 
+
 `can-connect-signalr` has a default naming convention for each of the proxy methods. It prepends the name of the hub,
 in lower case, to its associated action. For example, if the name of the `SignalR` hub were: "message", the default
 name for the `createData` method would be: `messageCreate`.
@@ -142,8 +145,8 @@ object.
 
 ```js
     signalR: {
-        url: 'http://test.com', 
-        name: 'Message' 
+        url: 'http://test.com',
+        name: 'Message'
         createName: 'nameOfMethod'
     }
 ```
@@ -157,23 +160,23 @@ and the RPC name. For example, using `Message` as the Hub name:
  - messageUpdatedData
  - messageDestroyedData
  - messageListData
- 
-For example, if the name of the hub were "message", the default name for a listener associated with a create event 
+
+For example, if the name of the hub were "message", the default name for a listener associated with a create event
 would be `messageCreated`. These, too, can be overwritten. For example, set the `createdName` property of the `SignalR`
 options object to overwrite the default listener name.
 
 ```js
     signalR: {
-        url: 'http://test.com', 
-        name: 'Message' 
+        url: 'http://test.com',
+        name: 'Message'
         createdName: 'nameOfMethod'
     }
 ```
 
 ## Use with CanJS
 
-Any `can-connect` connection can be mixed in to a [`DefineMap`](DefineMap). When using `can-connect-signalr` 
-with `DefineMap`, note that an `id` field must exist on any object returned from a Hub. 
+Any `can-connect` connection can be mixed in to a [`DefineMap`](DefineMap). When using `can-connect-signalr`
+with `DefineMap`, note that an `id` field must exist on any object returned from a Hub.
 
 To see how this is done, follow the code sample below:
 
@@ -211,7 +214,7 @@ var behaviors = [
 			url: 'http://test.com',
 			name: 'Message',
 			createName: 'postMessage', // Example of overwriting a default method name.
-			createdName: "messagePosted" // Example of overwriting a default listener name. 
+			createdName: "messagePosted" // Example of overwriting a default listener name.
 		}
 	});
 ```
