@@ -77,6 +77,43 @@ Message.List = DefineList.extend({
 Message.connection = signalRConnection;
 ```
 
+Below is a complete example of creating a `connection` and mixing it into a `DefineMap`:
+
+```js
+var DefineMap = require('can-define/map/map');
+var DefineList = require('can-define/list/list');
+
+var Message = DefineMap.extend({
+	text: 'string',
+	id: 'number'
+});
+
+Message.List = DefineList.extend({
+	'#': Message
+}, {});
+
+var behaviors = [
+		require('can-connect/constructor/constructor'),
+		require('can-connect/constructor/store/store'),
+		require('can-connect/can/map/map'),
+		require('can-connect/data/callbacks/callbacks'),
+		require('can-connect/real-time/real-time'),
+		require('can-connect/constructor/callbacks-once/callbacks-once'),
+		require('can-connect-signalr') // Import the signalR Behavior
+	];
+
+	Message.connection = connect(behaviors, {
+		Map: Message,
+		List: Message.List,
+		signalR: {
+			url: 'http://test.com',
+			name: 'MessageHub',
+			createName: 'postMessage', // Example of overwriting a default method name.
+			createdName: "messagePosted" // Example of overwriting a default listener name.
+		}
+	});
+```
+
 After assigning the `connection`, the `save` and `delete` methods on the `DefineMap` will call the `create`, `update`, 
 and `destroy` methods on the `connection`. The `DefineMap`'s static `get` and `getList` methods will call the `connection`'s 
 `getData` and `getListData` methods:
@@ -174,14 +211,14 @@ public class MessageHub : Hub
 `can-connect-signalr` has a default naming convention for each of the proxy methods. 
 
 ```
-name + Action
+hubName + Action
 ```
-For example:
+For example, a hub called "MessageHub" would have the following `createData` method:
 ```
-messageCreate
+messageHubCreate
 ```
 
-You can overwrite the names of any of the CRUD methods, by setting its corresponding method name property. For example,
+You can overwrite the names of any CRUD method, by setting its corresponding method name property. For example,
 to overwrite the name of the `createData` method:
 
 ```js
@@ -194,13 +231,13 @@ to overwrite the name of the `createData` method:
 
 `can-connect-signalr` provides default proxy RPC handler names, for the methods defined to listen for calls
 from a `SignalR` server. `can-connect-signalr` has a limited set of RPC handlers you can use. As with the proxy methods, 
-the listener names default to a combination of the hub name and the RPC name. For example, using `Message` as the Hub name:
+the listener names default to a combination of the hub name and the RPC name. For example, using `MessageHub` as the Hub name:
 
- - messageCreatedData
- - messageUpdatedData
- - messageDestroyedData
- - messageGetListData
- - messageGetData
+ - messageHubCreatedData
+ - messageHubUpdatedData
+ - messageHubDestroyedData
+ - messageHubGetListData
+ - messageHubGetData
 
 Proxy handler method name can be overwritten. The following overwrites the name of the `createdData` proxy handler method:
 
@@ -208,48 +245,6 @@ Proxy handler method name can be overwritten. The following overwrites the name 
     signalR: {
         url: 'http://test.com',
         name: 'MessageHub',
-        createdName: 'nameOfMethod'
+        createdName: 'makeMessage'
     }
-```
-
-## Use with CanJS
-
-Any `can-connect` connection can be mixed in to a [`DefineMap`](DefineMap). When using `can-connect-signalr`
-with `DefineMap`, note that an `id` field must exist on any object returned from a Hub.
-
-To see how this is done, follow the code sample below:
-
-```js
-var DefineMap = require('can-define/map/map');
-var DefineList = require('can-define/list/list');
-
-var Message = DefineMap.extend({
-	text: 'string',
-	id: 'number'
-});
-
-Message.List = DefineList.extend({
-	'#': Message
-}, {});
-
-var behaviors = [
-		require('can-connect/constructor/constructor'),
-		require('can-connect/constructor/store/store'),
-		require('can-connect/can/map/map'),
-		require('can-connect/data/callbacks/callbacks'),
-		require('can-connect/real-time/real-time'),
-		require('can-connect/constructor/callbacks-once/callbacks-once'),
-		require('can-connect-signalr') // Import the signalR Behavior
-	];
-
-	Message.connection = connect(behaviors, {
-		Map: Message,
-		List: Message.List,
-		signalR: {
-			url: 'http://test.com',
-			name: 'MessageHub',
-			createName: 'postMessage', // Example of overwriting a default method name.
-			createdName: "messagePosted" // Example of overwriting a default listener name.
-		}
-	});
 ```
