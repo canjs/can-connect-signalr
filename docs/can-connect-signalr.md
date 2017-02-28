@@ -26,7 +26,7 @@ Encapsulates connecting to a `SignalR` hub, by:
 
 ## Use
 
-`can-connect-signalr` is a [`can-connect`] behavior that makes a connection that can communicate with a
+`can-connect-signalr` is a [can-connect] behavior that makes a connection that can communicate with a
 [Hub](https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-server) on a
 [SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) server.
 
