@@ -26,7 +26,7 @@ Encapsulates connecting to a `SignalR` hub, by:
 
 ## Use
 
-`can-connect-signalr` is a `can-connect` behavior that makes a connection that can communicate with a
+`can-connect-signalr` is a [`can-connect`] behavior that makes a connection that can communicate with a
 [Hub](https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-server) on a
 [SignalR](https://docs.microsoft.com/en-us/aspnet/signalr/) server.
 
@@ -62,6 +62,23 @@ var signalRConnection = connect([
 With this configuration, the `signalRConnection` can make RPC calls to a `SignalR` hub named `MessageHub`
 located at `http://test.com`. If the `SignalR` hub is configured correctly (see below), the connection will 
 receive broadcast messages from the `SignalR` hub.
+
+The connection can be assigned to the `connection` property of a DefineMap:
+
+```js
+var Message = DefineMap.extend({
+  message: 'string'
+});
+
+Message.List = DefineList.extend({
+	'#': Message
+}, {});
+
+Message.connection = signalRConnection;
+```
+
+After assigning the `connection`, the `save`, and `delete` methods on the `DefineMap` will call the `create`, `update`, 
+and `destroy` methods on the `connection`. 
 
 ### Hub Interface Requirements
 
@@ -194,7 +211,7 @@ var Message = DefineMap.extend({
 });
 
 Message.List = DefineList.extend({
-	Map: Message
+	'#': Message
 }, {});
 
 var behaviors = [
