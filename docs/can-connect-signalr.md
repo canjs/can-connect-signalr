@@ -230,7 +230,7 @@ to overwrite the name of the `createData` method:
     }
 ```
 
-`can-connect-signalr` provides default proxy RPC handler names, for the methods defined to listen for calls
+`can-connect-signalr` provides default proxy RPC handler method names, for the methods defined to listen for calls
 from a `SignalR` server. `can-connect-signalr` has a limited set of RPC handlers you can use. As with the proxy methods, 
 the listener names default to a combination of the hub name and the RPC name. For example, using `MessageHub` as the Hub name:
 
