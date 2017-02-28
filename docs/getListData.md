@@ -47,7 +47,7 @@ It's expected that the server responds with the message list:
    "message": "Hello World"
  },
  {
-   "id": 1,
+   "id": 2,
    "name": "Johnson",
    "message": "Hello again World"
  }
@@ -67,8 +67,8 @@ signalR: {
 } //-> THROWS ERROR
 ```
 
-@param {int} id.
-@return {Promise<Object>} A promise that resolves to a message list.
+@param {object} queryParameters.
+@return {Promise<Object>} A promise that resolves to a list.
 
 
 @body

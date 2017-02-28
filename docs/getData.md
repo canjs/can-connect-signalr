@@ -60,7 +60,7 @@ signalR: {
 ```
 
 @param {int} id.
-@return {Promise<Object>} A promise that resolves to a message.
+@return {Promise<Object>} A promise that resolves to an instance.
 
 
 @body
