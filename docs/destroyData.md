@@ -1,13 +1,62 @@
 @function can-connect-signalr/destroyData destroyData
 @parent can-connect-signalr/data-interface
 
-@signature `destroyData(id)`
+@description Destroys an instance on the server.  This is called on a new instance by calling [destroy].
+
+@signature `destroyData(instanceData)`
 
 Invokes the method specified by [can-connect-signalr.signalR].destroyName or
-[can-connect-signalr.signalR].name+"Destroy".
+[can-connect-signalr.signalR].name+"Destroy" and expects the server to respond
+with the destroyd data and an [can-connect.id] property.
 
-## Setup 
-If your `SignalR` hub conforms to the required interface (see [can-connect-signalr]), there is nothing you need to 
+```js
+connect([
+    ...
+    require("can-connect-signalr");
+    ...
+],{
+    signalR: {
+        url: 'http://test.com', // URL of the SignalR server
+        name: 'MessageHub', // Name of the SignalR hub,
+        destroyName: 'destroyTheMessage'
+    },
+    Map: Message,
+    ...
+})
+
+```
+
+The following call to `.save()` calls a `destroyTheMessage` method on the `MessageHub` hub with the message's serialized data:
+
+```js
+message.destroy();
+// calls MesageHub.destroyTheMessage({
+//   id: 1 // where, 1 === the messages unique id
+// })
+```
+
+The following `signalR` connection configurations call their corresponding Hubs and methods:
+
+```
+signalR: { name: 'MessageHub' } //-> MessageHub.destroyMessageHub(messageData)
+signalR: {
+    name: 'MessageHub',
+    destroyName: "destroyIt"
+} //-> MessageHub.destroyIt(messageData)
+signalR: {
+    destroyName: "destroyIt"
+} //-> THROWS AN ERROR
+```
+
+@param {int} id.
+@return nothing.
+
+
+@body
+
+## Setup
+
+If your `SignalR` hub conforms to the required interface (see [can-connect-signalr]), there is nothing you need to
 do to configure this method on the client. If the method name of the `destroy` end point on your `SignalR` hub deviates from
 the standard expected by `can-connect-signalr`, you can override `can-connect-signalr`'s default naming by providing
 this property with the name expected by your `SignalR` hub.
@@ -20,33 +69,21 @@ this property with the name expected by your `SignalR` hub.
     }
 ```
 
-You can call the method directly off of a connection:
+You can call this method directly off of a connection:
 
 ```js
-connection.destroyData(id);
+connection.destroyData(instanceData);
 ```
 
 ## CanJS Usage
-If your connection is mixed in to a `DefineMap` (see [can-connect-signalr]), `destroyData` can be called off of the 
+
+If your connection is mixed in to a `DefineMap` (see [can-connect-signalr]), `destroyData` can be called off of the
 `DefineMap` constructor function. Note that `can-connect-signalr` requires the method signatures
 defined on your hub to accept only one parameter. You can pass in multiple values by sending the method
 an object:
 
 ```js
-// returns a promise that will be resolved once data is returned from the Hub.
-myMessageInstance.destroy();
-
-// OR
-
-myMessageInstance.destroy()
-  .then(function(saveResponse){
-		
-  });
+message.destroy();
 ```
 
-@param {Set} set.
-@return {Promise<Object>} A promise that resolves to nothing.
-
-
-
-    
+The`destroydData` takes care of updating model instances or lists.
