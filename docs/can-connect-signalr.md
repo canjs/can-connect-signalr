@@ -42,7 +42,7 @@ Specifically, we will detail the:
 
 ### `can-connect` Client setup
 
-A basic setup of `can-connect-signalr` requires adding the `signalR` behavior to a `can-connection`, as follows:
+A basic setup of `can-connect-signalr` requires adding the `signalR` behavior to a `can-connection`:
 
 ```js
 var connect = require("can-connect");
@@ -60,7 +60,7 @@ var signalRConnection = connect([
 ```
 
 With this configuration, the `signalRConnection` can make RPC calls to a `SignalR` hub named `MessageHub`
-located at `http://test.com`. If the `SignalR` hub is configured correctly (see below), the connection will 
+located at `http://test.com`. If the `SignalR` hub is configured correctly (see below), the connection will also 
 receive broadcast messages from the `SignalR` hub.
 
 The connection can be assigned to the `connection` property of a DefineMap:
@@ -77,8 +77,26 @@ Message.List = DefineList.extend({
 Message.connection = signalRConnection;
 ```
 
-After assigning the `connection`, the `save`, and `delete` methods on the `DefineMap` will call the `create`, `update`, 
-and `destroy` methods on the `connection`. 
+After assigning the `connection`, the `save` and `delete` methods on the `DefineMap` will call the `create`, `update`, 
+and `destroy` methods on the `connection`. The `DefineMap`'s static `get` and `getList` methods will call the `connection`'s 
+`getData` and `getListData` methods:
+
+```js
+// Get a list of data
+Message.getList();
+
+// Create a Message
+new Message({
+  message: 'Hello'
+}).save();
+
+// Update a message
+message.save();
+
+// Destroy a message
+message.destroy();
+
+```
 
 ### Hub Interface Requirements
 
