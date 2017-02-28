@@ -182,12 +182,8 @@ var DefineMap = require('can-define/map/map');
 var DefineList = require('can-define/list/list');
 
 var Message = DefineMap.extend({
-	text: {
-		type: 'string'
-	},
-	id: {
-		type: 'number'
-	}
+	text: 'string',
+	id: 'number'
 });
 
 Message.List = DefineList.extend({
@@ -201,7 +197,7 @@ var behaviors = [
 		require('can-connect/data/callbacks/callbacks'),
 		require('can-connect/real-time/real-time'),
 		require('can-connect/constructor/callbacks-once/callbacks-once'),
-		require('./signalr') // Import the signalR Behavior
+		require('can-connect-signalr') // Import the signalR Behavior
 	];
 
 	Message.connection = connect(behaviors, {
