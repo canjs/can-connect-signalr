@@ -60,7 +60,7 @@ var signalRConnection = connect([
 ```
 
 With this configuration, the `signalRConnection` can make RPC calls to a `SignalR` hub named `MessageHub`
-located at `http://test.com`. If the `SignalR` hub is configured correctly ([see below](#hub-interface)), the connection will also 
+located at `http://test.com`. If the `SignalR` hub is configured correctly, the connection will also 
 receive broadcast messages from the `SignalR` hub.
 
 The connection can be assigned to the `connection` property of a DefineMap:
@@ -75,6 +75,27 @@ Message.List = DefineList.extend({
 }, {});
 
 Message.connection = signalRConnection;
+```
+
+After assigning the `connection`, the `save` and `delete` methods on the `DefineMap` will call the `create`, `update`, 
+and `destroy` methods on the `connection`. The `DefineMap`'s static `get` and `getList` methods will call the `connection`'s 
+`getData` and `getListData` methods:
+
+```js
+// Get a list of data
+Message.getList();
+
+// Create a Message
+new Message({
+  message: 'Hello'
+}).save();
+
+// Update a message
+message.save();
+
+// Destroy a message
+message.destroy();
+
 ```
 
 Below is a complete example of creating a `connection` and mixing it into a `DefineMap`:
@@ -114,27 +135,7 @@ var behaviors = [
 	});
 ```
 
-After assigning the `connection`, the `save` and `delete` methods on the `DefineMap` will call the `create`, `update`, 
-and `destroy` methods on the `connection`. The `DefineMap`'s static `get` and `getList` methods will call the `connection`'s 
-`getData` and `getListData` methods:
 
-```js
-// Get a list of data
-Message.getList();
-
-// Create a Message
-new Message({
-  message: 'Hello'
-}).save();
-
-// Update a message
-message.save();
-
-// Destroy a message
-message.destroy();
-
-```
-<a name="hub-interface"></a>
 ### Hub Interface Requirements
 
 Any `SignalR` hub you will connect to with `can-connect-signalr` must conform to the following interface:
