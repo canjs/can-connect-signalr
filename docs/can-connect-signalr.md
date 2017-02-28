@@ -60,16 +60,12 @@ var signalRConnection = connect([
 ```
 
 With this configuration, the `signalRConnection` can make RPC calls to a `SignalR` hub named `MessageHub`
-located at `http://test.com`.
-
-  - Calling any of the `get` methods will return data from the server.
-  - Calling any of the Create/Update/Delete methods will affect data on the server.
-  - If the `SignalR` hub is configured correctly (see below), the connection will receive broadcast messages from the `SignalR` hub.
+located at `http://test.com`. If the `SignalR` hub is configured correctly (see below), the connection will 
+receive broadcast messages from the `SignalR` hub.
 
 ### Hub Interface Requirements
 
 Any `SignalR` hub you will connect to with `can-connect-signalr` must conform to the following interface:
-
 
 ```c-sharp
 public class MessageHub : Hub
@@ -137,15 +133,21 @@ public class MessageHub : Hub
  - createData
  - updateData
  - destroyData
- - getList
+ - getListData
+ - getData
 
-`can-connect-signalr` has a default naming convention for each of the proxy methods. It prepends the name of the hub,
-in lower case, to its associated action. For example, if the name of the `SignalR` hub were: "message", the default
-name for the `createData` method would be: `messageCreate`.
+`can-connect-signalr` has a default naming convention for each of the proxy methods. 
 
-You can overwrite the names of any of the CRUD methods, by setting its corresponding name property. For example,
-to overwrite the method name of the `createData` method, set the `createName` property of the `SignalR` options
-object.
+```
+name + Action
+```
+For example:
+```
+messageCreate
+```
+
+You can overwrite the names of any of the CRUD methods, by setting its corresponding method name property. For example,
+to overwrite the name of the `createData` method:
 
 ```js
     signalR: {
@@ -155,19 +157,17 @@ object.
     }
 ```
 
-Similarly, `can-connect-signalr` provides default proxy RPC handler names, for the methods defined to listen for replies
-from a `SignalR` server. `can-connect-signalr` has a limited set of RPC handlers you can use. The set is limited to
-the CUD operations it supports. As with the proxy methods, the listener names default to a combination of the hub name
-and the RPC name. For example, using `Message` as the Hub name:
+`can-connect-signalr` provides default proxy RPC handler names, for the methods defined to listen for calls
+from a `SignalR` server. `can-connect-signalr` has a limited set of RPC handlers you can use. As with the proxy methods, 
+the listener names default to a combination of the hub name and the RPC name. For example, using `Message` as the Hub name:
 
  - messageCreatedData
  - messageUpdatedData
  - messageDestroyedData
- - messageListData
+ - messageGetListData
+ - messageGetData
 
-For example, if the name of the hub were "message", the default name for a listener associated with a create event
-would be `messageCreated`. These, too, can be overwritten. For example, set the `createdName` property of the `SignalR`
-options object to overwrite the default listener name.
+Proxy handler method name can be overwritten. The following overwrites the name of the `createdData` proxy handler method:
 
 ```js
     signalR: {
