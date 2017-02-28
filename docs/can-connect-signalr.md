@@ -102,7 +102,7 @@ public class MessageHub : Hub
         }
 
 		// Method should take whatever data is required to destroy an instance (usually an id)
-        public MessageViewModel ItemDestroy( int id )
+        public MessageModel ItemDestroy( int id )
         {
             DELETE_FROM_DATABASE( id );
             
@@ -111,16 +111,16 @@ public class MessageHub : Hub
         }
 
 		// Method should take whatever data is required to obtain a list (if any)
-        public List<Message> ItemGetList( MessageQueryParams queryParams )
+        public List<MessageModel> ItemGetList( MessageQueryParams queryParams )
         {
-            List<Message> messages = GET_DATA_FROM_DATABASE( queryParams );
+            List<MessageModel> messages = GET_DATA_FROM_DATABASE( queryParams );
             return messages;
         }
 
         // Method should take whatever data is required to obtain a specific item
-        public Message ItemGet( int id )
+        public MessageModel ItemGet( int id )
         {
-            Message message = GET_RECORD_FROM_DATABASE( id );
+            MessageModel message = GET_RECORD_FROM_DATABASE( id );
             
             return message;
         }
