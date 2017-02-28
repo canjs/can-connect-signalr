@@ -6,8 +6,7 @@
 @signature `destroyData(instanceData)`
 
 Invokes the method specified by [can-connect-signalr.signalR].destroyName or
-[can-connect-signalr.signalR].name+"Destroy" and expects the server to respond
-with the destroyd data and an [can-connect.id] property.
+[can-connect-signalr.signalR].name+"Destroy".
 
 ```js
 connect([
@@ -26,7 +25,7 @@ connect([
 
 ```
 
-The following call to `.save()` calls a `destroyTheMessage` method on the `MessageHub` hub with the message's serialized data:
+The following call to `.destroy()` calls a `destroyTheMessage` method on the `MessageHub` hub with the message's id:
 
 ```js
 message.destroy();
