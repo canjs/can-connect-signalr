@@ -6,7 +6,7 @@
 @signature `getData(id)`
 
 Invokes the method specified by [can-connect-signalr.signalR].getData or
-[can-connect-signalr.signalR].name+"Get" and expects the server to respond
+[can-connect-signalr.signalR].name+"GetData" and expects the server to respond
 with the data.
 
 ```js

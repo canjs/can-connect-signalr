@@ -1,12 +1,82 @@
 @function can-connect-signalr/getListData getListData
 @parent can-connect-signalr/data-interface
 
-@signature `getListData(set)`
+@description Gets an list of data from the server. This is called on a constructor function by calling [getListData].
+
+@signature `getListData(queryParams)`
+
+Invokes the method specified by [can-connect-signalr.signalR].getListData or
+[can-connect-signalr.signalR].name+"GetListData" and expects the server to respond
+with the data.
+
+```js
+connect([
+    ...
+    require("can-connect-signalr");
+    ...
+],{
+    signalR: {
+        url: 'http://test.com', // URL of the SignalR server
+        name: 'MessageHub', // Name of the SignalR hub,
+        getListData: 'getListOfMessages'
+    },
+    Map: Message
+    ...
+})
+
+```
+
+The following call to `.getListData()` calls a `getListOfMessages` method on the `MessageHub` hub with the provided parameters:
+
+```js
+Message.getListData({
+  name: 'Johnson'
+});
+// calls MesageHub.getListOfMessages({
+//   name: 'Johnson'
+// })
+```
+
+It's expected that the server responds with the message list:
+
+```js
+[
+ {
+   "id": 1,
+   "name": "Johnson",
+   "message": "Hello World"
+ },
+ {
+   "id": 1,
+   "name": "Johnson",
+   "message": "Hello again World"
+ }
+]
+```
+
+The following `signalR` connection configurations call their corresponding Hubs and methods:
+
+```
+signalR: { name: 'MessageHub' } //-> MessageHub.messageHubGetListData(messageData)
+signalR: {
+    name: 'MessageHub',
+    getListData: "getThem"
+} //-> MessageHub.getThem(messageData)
+signalR: {
+    getListData: "getThem"
+} //-> THROWS ERROR
+```
+
+@param {int} id.
+@return {Promise<Object>} A promise that resolves to a message list.
 
 
-## Setup 
-If your `SignalR` hub conforms to the required interface (see [can-connect-signalr]), there is nothing you need to 
-do to configure this method on the client. If the method name of the `getListData` end point on your `SignalR` hub deviates from
+@body
+
+## Setup
+
+If your `SignalR` hub conforms to the required interface (see [can-connect-signalr]), there is nothing you need to
+do to configure this method on the client. If the method name of the `getList` end point on your `SignalR` hub deviates from
 the standard expected by `can-connect-signalr`, you can override `can-connect-signalr`'s default naming by providing
 this property with the name expected by your `SignalR` hub.
 
@@ -14,40 +84,23 @@ this property with the name expected by your `SignalR` hub.
     signalR: {
         url: 'http://test.com', // URL of the SignalR server
         name: 'MessageHub' // Name of the SignalR hub,
-        getListName: 'nameOfMethod'
+        getListData: 'nameOfMethod'
     }
 ```
 
-
-Invokes the method specified by [can-connect-signalr.signalR].getListName or
-[can-connect-signalr.signalR].name+"GetList".
-
-The following shows how [can-can-connect-signalr.signalR] calls getListData and
-what it does with the response:
+You can call this method directly off of a connection:
 
 ```js
-// returns a promise that will be resolved once data is received by the Hub.
-// Note: Data returned from the Hub will be received in the proxy listener.
-var listData = connection.getListData().then(function(data) {
-	// do something
-});
-
+connection.getListData(queryParams);
 ```
 
 ## CanJS Usage
 
-If your connection is mixed in to a `DefineMap` (see [can-connect-signalr]), `getListData` can be called off of the 
-`DefineMap` constructor function (static). Note that `can-connect-signalr` requires the method signatures
+If your connection is mixed in to a `DefineMap` (see [can-connect-signalr]), `getListData` can be called off of the
+`DefineMap` constructor function. Note that `can-connect-signalr` requires the method signatures
 defined on your hub to accept only one parameter. You can pass in multiple values by sending the method
 an object:
 
 ```js
-// Note the method is called `getList`. This is not a typo.
-MessageConstructor.getList()
-  .then(function(response){
-		
-  });
+Message.getListData(queryParams);
 ```
-
-@param {Set} set.
-@return {Promise<Object>} A promise that resolves to the list data.
