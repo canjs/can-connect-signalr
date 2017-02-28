@@ -60,7 +60,7 @@ var signalRConnection = connect([
 ```
 
 With this configuration, the `signalRConnection` can make RPC calls to a `SignalR` hub named `MessageHub`
-located at `http://test.com`. If the `SignalR` hub is configured correctly (see below), the connection will also 
+located at `http://test.com`. If the `SignalR` hub is configured correctly ([see below](#hub-interface)), the connection will also 
 receive broadcast messages from the `SignalR` hub.
 
 The connection can be assigned to the `connection` property of a DefineMap:
@@ -134,7 +134,7 @@ message.save();
 message.destroy();
 
 ```
-
+<a name="hub-interface"></a>
 ### Hub Interface Requirements
 
 Any `SignalR` hub you will connect to with `can-connect-signalr` must conform to the following interface:
