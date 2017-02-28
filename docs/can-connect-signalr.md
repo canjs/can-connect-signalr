@@ -146,7 +146,7 @@ object.
 ```js
     signalR: {
         url: 'http://test.com',
-        name: 'Message'
+        name: 'MessageHub',
         createName: 'nameOfMethod'
     }
 ```
@@ -168,7 +168,7 @@ options object to overwrite the default listener name.
 ```js
     signalR: {
         url: 'http://test.com',
-        name: 'Message'
+        name: 'MessageHub',
         createdName: 'nameOfMethod'
     }
 ```
@@ -208,7 +208,7 @@ var behaviors = [
 		List: Message.List,
 		signalR: {
 			url: 'http://test.com',
-			name: 'Message',
+			name: 'MessageHub',
 			createName: 'postMessage', // Example of overwriting a default method name.
 			createdName: "messagePosted" // Example of overwriting a default listener name.
 		}

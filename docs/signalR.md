@@ -11,7 +11,7 @@ Below is an example of a fully configured signalR options object:
     
     signalR: {
         url: 'http://test.com',
-        name: 'Message',
+        name: 'MessageHub',
         createName: 'postMessage', 
         createdName: 'messagePosted',
         updateName: 'updateThis',

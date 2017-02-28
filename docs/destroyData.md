@@ -15,7 +15,7 @@ this property with the name expected by your `SignalR` hub.
 ```js
     signalR: {
         url: 'http://test.com', // URL of the SignalR server
-        name: 'Message' // Name of the SignalR hub,
+        name: 'MessageHub' // Name of the SignalR hub,
         destroyName: 'nameOfMethod'
     }
 ```
