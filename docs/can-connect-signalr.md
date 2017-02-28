@@ -59,7 +59,7 @@ var signalRConnection = connect([
 });
 ```
 
-With this configuration, the `signalRConnection` can make RPC calls to a `SignalR` hub named `Message`
+With this configuration, the `signalRConnection` can make RPC calls to a `SignalR` hub named `MessageHub`
 located at `http://test.com`.
 
   - Calling any of the `get` methods will return data from the server.
@@ -68,8 +68,7 @@ located at `http://test.com`.
 
 ### Hub Interface Requirements
 
-Any `SignalR` hub you will connect to with `can-connect-signalr` must conform to the following interface, where the
-terms `Item` && `item` should be replaced by your method name prefix:
+Any `SignalR` hub you will connect to with `can-connect-signalr` must conform to the following interface:
 
 
 ```c-sharp
@@ -103,22 +102,27 @@ public class MessageHub : Hub
         }
 
 		// Method should take whatever data is required to destroy an instance (usually an id)
-        public MessageViewModel ItemDestroy()
+        public MessageViewModel ItemDestroy( int id )
         {
+            DELETE_FROM_DATABASE( id );
+            
             // Any RPC calls to the client related to destroy go here
-            Clients.All.itemDestroyed(...);
+            Clients.All.itemDestroyed(id);
         }
 
 		// Method should take whatever data is required to obtain a list (if any)
-        public List<T> ItemGetList(...)
+        public List<Message> ItemGetList( MessageQueryParams queryParams )
         {
-            return ...
+            List<Message> messages = GET_DATA_FROM_DATABASE( queryParams );
+            return messages;
         }
 
         // Method should take whatever data is required to obtain a specific item
-        public Item ItemGet(...)
+        public Message ItemGet( int id )
         {
-            return ...
+            Message message = GET_RECORD_FROM_DATABASE( id );
+            
+            return message;
         }
 
         ...

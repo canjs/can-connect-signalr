@@ -1,8 +1,7 @@
 @function can-connect-signalr/createData createData
 @parent can-connect-signalr/data-interface
 
-@description Creates an instance on the server.  This is called on a
-new instance by calling [save].
+@description Creates an instance on the server.  This is called on a new instance by calling [save].
 
 @signature `createData(instanceData)`
 
@@ -10,17 +9,15 @@ Invokes the method specified by [can-connect-signalr.signalR].createName or
 [can-connect-signalr.signalR].name+"Create" and expects the server to respond
 with the created data and an [can-connect.id] property.
 
-For example, with the following connection:
-
 ```js
 connect([
     ...
-    require("can-connect-signalr")
+    require("can-connect-signalr");
     ...
 ],{
     signalR: {
         url: 'http://test.com', // URL of the SignalR server
-        name: 'MessageHub' // Name of the SignalR hub,
+        name: 'MessageHub', // Name of the SignalR hub,
         createName: 'createTheMessage'
     },
     Map: Message,
