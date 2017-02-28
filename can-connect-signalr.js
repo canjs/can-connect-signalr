@@ -12,6 +12,15 @@ var camelCase = function (str) {
 module.exports = connect.behavior('can-connect-signalr', function signalR(baseConnection) {
   return {
     init: function () {
+
+      if (!this.signalR.url) {
+        throw new Error('Invalid SignalR Hub URL. URL cannot be blank.');
+      }
+
+      if (!this.signalR.name) {
+        throw new Error('Invalid SignalR Hub name. Hub name cannot be blank.');
+      }
+
       baseConnection.init.apply(this, arguments);
       var context = this;
       this.signalR.ready = new Promise(function (resolve, reject) {
