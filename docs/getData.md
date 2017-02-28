@@ -1,12 +1,12 @@
 @function can-connect-signalr/getData getData
 @parent can-connect-signalr/data-interface
 
-@description Creates an instance on the server.  This is called on a new instance by calling [save].
+@description Gets an instance from the server. This is called on a constructor function by calling [getData].
 
-@signature `getData(instanceData)`
+@signature `getData(id)`
 
 Invokes the method specified by [can-connect-signalr.signalR].getData or
-[can-connect-signalr.signalR].name+"Create" and expects the server to respond
+[can-connect-signalr.signalR].name+"Get" and expects the server to respond
 with the data.
 
 ```js
@@ -49,7 +49,7 @@ It's expected that the server responds with the message:
 The following `signalR` connection configurations call their corresponding Hubs and methods:
 
 ```
-signalR: { name: 'MessageHub' } //-> MessageHub.getMessageHub(messageData)
+signalR: { name: 'MessageHub' } //-> MessageHub.messageHubGetData(messageData)
 signalR: {
     name: 'MessageHub',
     getData: "getIt"

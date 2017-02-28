@@ -71,12 +71,12 @@ module.exports = connect.behavior('can-connect-signalr', function signalR(baseCo
     },
     getListData: function (set) {
       return this.signalR.ready.then(function (signalR) {
-        return signalR.proxy.invoke(signalR.getListDataName || (camelCase(signalR.name) + "GetList"), set);
+        return signalR.proxy.invoke(signalR.getListDataName || (camelCase(signalR.name) + "GetListData"), set);
       });
     },
     get: function (set) {
       return this.signalR.ready.then(function (signalR) {
-        return signalR.proxy.invoke(signalR.getDataName || (camelCase(signalR.name) + "Get"), set);
+        return signalR.proxy.invoke(signalR.getDataName || (camelCase(signalR.name) + "GetData"), set);
       });
     }
   };

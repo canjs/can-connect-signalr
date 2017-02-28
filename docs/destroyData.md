@@ -1,9 +1,9 @@
 @function can-connect-signalr/destroyData destroyData
 @parent can-connect-signalr/data-interface
 
-@description Destroys an instance on the server.  This is called on a new instance by calling [destroy].
+@description Destroys an instance on the server.  This is called on an instance by calling [destroy].
 
-@signature `destroyData(instanceData)`
+@signature `destroyData(id)`
 
 Invokes the method specified by [can-connect-signalr.signalR].destroyName or
 [can-connect-signalr.signalR].name+"Destroy".
@@ -37,11 +37,11 @@ message.destroy();
 The following `signalR` connection configurations call their corresponding Hubs and methods:
 
 ```
-signalR: { name: 'MessageHub' } //-> MessageHub.destroyMessageHub(messageData)
+signalR: { name: 'MessageHub' } //-> MessageHub.messageHubDestroy(id)
 signalR: {
     name: 'MessageHub',
     destroyName: "destroyIt"
-} //-> MessageHub.destroyIt(messageData)
+} //-> MessageHub.destroyIt(id)
 signalR: {
     destroyName: "destroyIt"
 } //-> THROWS AN ERROR

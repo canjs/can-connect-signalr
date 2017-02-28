@@ -59,7 +59,7 @@ signalR: {
 } //-> MessageHub.createIt(messageData)
 signalR: {
     createName: "createIt"
-} //-> BREAKS
+} //-> THROWS AN ERROR
 ```
 
 @param {Set} set.
