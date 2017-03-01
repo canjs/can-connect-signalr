@@ -10,18 +10,17 @@ Invokes the method specified by [can-connect-signalr.signalR].destroyName or
 
 ```js
 connect([
-    ...
-    require("can-connect-signalr");
-    ...
-],{
-    signalR: {
-        url: 'http://test.com', // URL of the SignalR server
-        name: 'MessageHub', // Name of the SignalR hub,
-        destroyName: 'destroyTheMessage'
-    },
-    Map: Message,
-    ...
-})
+  ...
+  require("can-connect-signalr")
+  ...
+], {
+  signalR: {
+    url: 'http://test.com', // URL of the SignalR server
+    name: 'MessageHub', // Name of the SignalR hub,
+    destroyName: 'destroyTheMessage'
+  },
+  Map: Message,
+});
 
 ```
 
@@ -71,7 +70,7 @@ this property with the name expected by your `SignalR` hub.
 You can call this method directly off of a connection:
 
 ```js
-connection.destroyData(instanceData);
+connection.destroyData(id);
 ```
 
 ## CanJS Usage
