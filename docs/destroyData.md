@@ -11,7 +11,7 @@ Invokes the method specified by [can-connect-signalr.signalR].destroyName or
 ```js
 connect([
   ...
-  require("can-connect-signalr")
+  require("can-connect-signalr"),
   ...
 ], {
   signalR: {
@@ -19,7 +19,7 @@ connect([
     name: 'MessageHub', // Name of the SignalR hub,
     destroyName: 'destroyTheMessage'
   },
-  Map: Message,
+  Map: Message
 });
 
 ```

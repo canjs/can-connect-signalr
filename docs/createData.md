@@ -12,7 +12,7 @@ with the created data and an [can-connect.id] property.
 ```js
 connect([
   ...
-  require("can-connect-signalr")
+  require("can-connect-signalr"),
   ...
 ], {
   signalR: {
@@ -20,7 +20,7 @@ connect([
     name: 'MessageHub', // Name of the SignalR hub,
     createName: 'createTheMessage'
   },
-  Map: Message,
+  Map: Message
 });
 
 ```

@@ -11,18 +11,18 @@ with the data.
 
 ```js
 connect([
-    ...
-    require("can-connect-signalr");
-    ...
-],{
-    signalR: {
-        url: 'http://test.com', // URL of the SignalR server
-        name: 'MessageHub', // Name of the SignalR hub,
-        getListData: 'getListOfMessages'
-    },
-    Map: Message
-    ...
-})
+  ...
+  require("can-connect-signalr"),
+  ...
+], {
+  signalR: {
+    url: 'http://test.com', // URL of the SignalR server
+    name: 'MessageHub', // Name of the SignalR hub,
+    getListData: 'getMessages'
+  },
+  Map: Message,
+  ...
+});
 
 ```
 

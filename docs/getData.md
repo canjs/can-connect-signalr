@@ -11,18 +11,18 @@ with the data.
 
 ```js
 connect([
-    ...
-    require("can-connect-signalr");
-    ...
-],{
-    signalR: {
-        url: 'http://test.com', // URL of the SignalR server
-        name: 'MessageHub', // Name of the SignalR hub,
-        getData: 'getTheMessage'
-    },
-    Map: Message
-    ...
-})
+  ...
+  require("can-connect-signalr"),
+  ...
+], {
+  signalR: {
+    url: 'http://test.com', // URL of the SignalR server
+    name: 'MessageHub', // Name of the SignalR hub,
+    getData: 'getTheMessage'
+  },
+  Map: Message,
+  ...
+});
 
 ```
 
@@ -73,11 +73,11 @@ the standard expected by `can-connect-signalr`, you can override `can-connect-si
 this property with the name expected by your `SignalR` hub.
 
 ```js
-    signalR: {
-        url: 'http://test.com', // URL of the SignalR server
-        name: 'MessageHub' // Name of the SignalR hub,
-        getData: 'nameOfMethod'
-    }
+signalR: {
+  url: 'http://test.com', // URL of the SignalR server
+  name: 'MessageHub' // Name of the SignalR hub,
+  getData: 'nameOfMethod'
+}
 ```
 
 You can call this method directly off of a connection:
