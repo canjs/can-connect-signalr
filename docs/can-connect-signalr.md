@@ -16,9 +16,7 @@ Encapsulates connecting to a `SignalR` hub, by:
 - listening for the following messages pushed from the server to the browser:
   - [can-connect-signalr.signalR]`.createdName`,
   - [can-connect-signalr.signalR]`.updatedName`,
-  - [can-connect-signalr.signalR]`.destroyedName`,
-  - [can-connect-signalr.signalR]`.listDataName`,
-  - [can-connect-signalr.signalR]`.dataName`
+  - [can-connect-signalr.signalR]`.destroyedName`
 
   and calling: [can-connect/real-time/real-time.createInstance], [can-connect/real-time/real-time.updateInstance], or [can-connect/real-time/real-time.destroyInstance].
 
@@ -42,103 +40,93 @@ Specifically, we will detail the:
 
 ### `can-connect` Client setup
 
-A basic setup of `can-connect-signalr` requires adding the `signalR` behavior to a `can-connection`:
-
-```js
-var connect = require("can-connect");
-var signalRConnection = connect([
-  	require("can-connect/constructor/constructor"),
-  	require('can-connect/constructor/callbacks-once/callbacks-once'),
-  	require('can-connect/real-time/real-time'),
-    require('can-connect-signalr') // Add SignalR Behavior
-],{
-    signalR: {
-        url: 'http://test.com', // URL of the SignalR server
-        name: 'MessageHub' // Name of the SignalR hub
-    }
-});
-```
-
-With this configuration, the `signalRConnection` can make RPC calls to a `SignalR` hub named `MessageHub`
-located at `http://test.com`. If the `SignalR` hub is configured correctly, the connection will also 
-receive broadcast messages from the `SignalR` hub.
-
-The connection can be assigned to the `connection` property of a DefineMap:
-
-```js
-var Message = DefineMap.extend({
-  message: 'string'
-});
-
-Message.List = DefineList.extend({
-	'#': Message
-}, {});
-
-Message.connection = signalRConnection;
-```
-
-After assigning the `connection`, the `save` and `delete` methods on the `DefineMap` will call the `create`, `update`, 
-and `destroy` methods on the `connection`. The `DefineMap`'s static `get` and `getList` methods will call the `connection`'s 
-`getData` and `getListData` methods:
-
-```js
-// Get a list of data
-Message.getList();
-
-// Create a Message
-new Message({
-  message: 'Hello'
-}).save();
-
-// Update a message
-message.save();
-
-// Destroy a message
-message.destroy();
-
-```
-
-Below is a complete example of creating a `connection` and mixing it into a `DefineMap`:
+Below is a complete example of connecting a `DefineMap` model type to
+a SignalR hub.
 
 ```js
 var DefineMap = require('can-define/map/map');
 var DefineList = require('can-define/list/list');
+var connect = require("can-connect");
 
+// Defines the Type that will be used on the client.
 var Message = DefineMap.extend({
-	text: 'string',
+	body: 'string',
 	id: 'number'
 });
 
+// Defines a List type that contains instances of the
+// Type.
 Message.List = DefineList.extend({
-	'#': Message
-}, {});
+    '#': Message
+});
 
+// The minimal behaviors used to create the connection
 var behaviors = [
-		require('can-connect/constructor/constructor'),
-		require('can-connect/constructor/store/store'),
-		require('can-connect/can/map/map'),
-		require('can-connect/data/callbacks/callbacks'),
-		require('can-connect/real-time/real-time'),
-		require('can-connect/constructor/callbacks-once/callbacks-once'),
-		require('can-connect-signalr') // Import the signalR Behavior
-	];
+	require('can-connect/constructor/constructor'),
+	require('can-connect/constructor/store/store'),
+	require('can-connect/can/map/map'),
+	require('can-connect/data/callbacks/callbacks'),
+	require('can-connect/real-time/real-time'),
+	require('can-connect/constructor/callbacks-once/callbacks-once'),
+	require('can-connect-signalr') // Import the signalR Behavior
+];
 
-	Message.connection = connect(behaviors, {
-		Map: Message,
-		List: Message.List,
-		signalR: {
-			url: 'http://test.com',
-			name: 'MessageHub',
-			createName: 'postMessage', // Example of overwriting a default method name.
-			createdName: "messagePosted" // Example of overwriting a default listener name.
-		}
-	});
+// Connects the types to the SignalR server
+Message.connection = connect(behaviors, {
+	Map: Message,
+	List: Message.List,
+	signalR: {
+		url: 'http://test.com',
+		name: 'MessageHub'
+	}
+});
 ```
 
+This example creates a `Message` [can-define/map/map] type and
+`Message.List` [can-define/list/list] type and connects them
+to `MessageHub` at `http://test.com`.
 
-### Hub Interface Requirements
+This sets up `Message` so it can retrieve, create, update and
+delete `Message`s as follows:
 
-Any `SignalR` hub you will connect to with `can-connect-signalr` must conform to the following interface:
+- `Message.getList({due: "today"})` - retrieves a list of messages.
+
+  This calls `MessageHub`'s '`public List<MessageModel> messageHubGetListData(MessageQueryParams queryParams)` method which is expected to return a list of matched messages.
+
+- `Message.get({id: 5})` - gets a single message.
+
+  This calls `MessageHub`'s `public MessageModel messageHubGetData( int id )` method which is expected to return a single message.
+
+- `var message = new Message({body: "Hello World!"}).save()` - creates messages.
+
+  This calls `MessageHub`'s `public MessageModel messageHubCreate( MessageModel message )` method with the [can-define.types.serialize serialized] properties of the client message.  `MessageHubCreate` is expected to persist the message, add a unique
+  [can-connect/base/base.id] property and value, and return the `Message`'s new data. It should also notify clients that a message was created.
+
+- `message.body = "Hi there."; message.save()` - updates a message.
+
+  This calls `MessageHub`'s `public MessageModel messageHubUpdate( MessageModel message )` method which is expected to update the persisted representation of the message
+  and return the `Message`'s new data. It should also notify clients that a
+  message was updated.
+
+- `message.destroy()` - deletes a message.
+
+  This calls `MessageHub`'s `public MessageModel messageHubDestroy( MessageModel message )` method which is expected to delete the persisted representation of the message
+  and return the `Message`'s updated data. It should also notify clients that a
+  message was destroyed.
+
+
+This setup also subscribes to the following messages published by the SignalR hub:
+
+- `messageHubCreatedData` - Publishes messages that are created. These events are used to call [can-connect/real-time/real-time.createInstance].
+- `messageHubUpdatedData` - Publishes messages that are updated. These events are used to call [can-connect/real-time/real-time.updateInstance].
+- `messageHubDestroyedData` - Publishes messages that are destroyed. These events are used to call [can-connect/real-time/real-time.destroyInstance].
+
+
+
+### Hub Server Setup
+
+The following code outlines a `MessageHub` that would work with with
+the above client setup:
 
 ```c-sharp
 public class MessageHub : Hub
@@ -149,7 +137,7 @@ public class MessageHub : Hub
         }
 
 		// Method should take whatever data is required to create an instance
-        public MessageModel MessageCreate( MessageModel message )
+        public MessageModel messageHubCreate( MessageModel message )
         {
             PERSIST_TO_DATABASE( message );
 
@@ -161,7 +149,7 @@ public class MessageHub : Hub
         }
 
 		// Method should take whatever data is required to update an instance
-        public MessageModel messageUpdate( MessageModel message )
+        public MessageModel messageHubUpdate( MessageModel message )
         {
             UPDATE_DATABASE( message );
 
@@ -171,26 +159,26 @@ public class MessageHub : Hub
         }
 
 		// Method should take whatever data is required to destroy an instance (usually an id)
-        public MessageModel MessageDestroy( int id )
+        public MessageModel messageDestroy( int id )
         {
             DELETE_FROM_DATABASE( id );
-            
+
             // Any RPC calls to the client related to destroy go here
             Clients.All.itemDestroyed(id);
         }
 
 		// Method should take whatever data is required to obtain a list (if any)
-        public List<MessageModel> MessageGetList( MessageQueryParams queryParams )
+        public List<MessageModel> messageGetList( MessageQueryParams queryParams )
         {
             List<MessageModel> messages = GET_DATA_FROM_DATABASE( queryParams );
             return messages;
         }
 
         // Method should take whatever data is required to obtain a specific item
-        public MessageModel MessageGet( int id )
+        public MessageModel messageGet( int id )
         {
             MessageModel message = GET_RECORD_FROM_DATABASE( id );
-            
+
             return message;
         }
 
@@ -198,54 +186,39 @@ public class MessageHub : Hub
     }
 ```
 
-## Client Configuration
 
-`can-connect-signalr` provides the following CRUD methods that define an interface to a predefined set of
-`SignalR` proxy methods:
+## Configuration
 
- - createData
- - updateData
- - destroyData
- - getListData
- - getData
+The name of the Hub is specified by [can-connect-signalr.signalR]`.name`.
+This is used to create default method and event names.
 
-`can-connect-signalr` has a default naming convention for each of the proxy methods. 
+For example, if the [can-connect-signalr.signalR]`.name` is `"TaskHub"`, it
+will make RPC calls for the following methods ([can-connect-signalr.signalR] configuration name in parenthesis):
+
+- `taskHubGetData` (`signalR.getListName`)
+- `taskHubGetListData` (`signalR.getListName`)
+- `taskHubCreateData` (`signalR.createName`)
+- `taskHubUpdateData` (`signalR.updateName`)
+- `taskHubDestroyData` (`signalR.destroyName`)
+
+It will listen to the following events ([can-connect-signalr.signalR] configuration name in parenthesis):
+
+- `taskHubCreatedData` (`signalR.createdData`)
+- `taskHubUpdatedData` (`signalR.updatedData`)
+- `taskHubDestroyedData` (`signalR.destroyedData`)
+
+
+For example, you can overwrite these defaults like:
 
 ```
-hubName + Action
-```
-For example, a hub called "MessageHub" would have the following `createData` method:
-```
-messageHubCreate
-```
-
-You can overwrite the names of any CRUD method, by setting its corresponding method name property. For example,
-to overwrite the name of the `createData` method:
-
-```js
+connect(behaviors,{
+    Map: Task,
     signalR: {
-        url: 'http://test.com',
-        name: 'MessageHub',
-        createName: 'nameOfMethod'
+        url: "/hubs",
+        name: "TaskHub",
+
+        // Calls TaskHub.getList() instead of TaskHub.taskHubGetListData().
+        getListName: "getList",
     }
-```
-
-`can-connect-signalr` provides default proxy RPC handler method names, for the methods defined to listen for calls
-from a `SignalR` server. `can-connect-signalr` has a limited set of RPC handlers you can use. As with the proxy methods, 
-the listener names default to a combination of the hub name and the RPC name. For example, using `MessageHub` as the Hub name:
-
- - messageHubCreatedData
- - messageHubUpdatedData
- - messageHubDestroyedData
- - messageHubGetListData
- - messageHubGetData
-
-Proxy handler method name can be overwritten. The following overwrites the name of the `createdData` proxy handler method:
-
-```js
-    signalR: {
-        url: 'http://test.com',
-        name: 'MessageHub',
-        createdName: 'makeMessage'
-    }
+});
 ```
