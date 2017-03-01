@@ -20,7 +20,8 @@ connect([
     name: 'MessageHub', // Name of the SignalR hub,
     createName: 'createTheMessage'
   },
-  Map: Message
+  Map: Message,
+  ...
 });
 
 ```

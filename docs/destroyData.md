@@ -19,7 +19,8 @@ connect([
     name: 'MessageHub', // Name of the SignalR hub,
     destroyName: 'destroyTheMessage'
   },
-  Map: Message
+  Map: Message,
+  ...
 });
 
 ```
@@ -84,4 +85,4 @@ an object:
 message.destroy();
 ```
 
-The`destroydData` takes care of updating model instances or lists.
+The `messageDestroyed` method takes care of updating model instances or lists on connected clients.
