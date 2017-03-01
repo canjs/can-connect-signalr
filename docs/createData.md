@@ -11,18 +11,18 @@ with the created data and an [can-connect.id] property.
 
 ```js
 connect([
-    ...
-    require("can-connect-signalr");
-    ...
-],{
-    signalR: {
-        url: 'http://test.com', // URL of the SignalR server
-        name: 'MessageHub', // Name of the SignalR hub,
-        createName: 'createTheMessage'
-    },
-    Map: Message,
-    ...
-})
+  ...
+  require("can-connect-signalr"),
+  ...
+], {
+  signalR: {
+    url: 'http://test.com', // URL of the SignalR server
+    name: 'MessageHub', // Name of the SignalR hub,
+    createName: 'createTheMessage'
+  },
+  Map: Message,
+  ...
+});
 
 ```
 

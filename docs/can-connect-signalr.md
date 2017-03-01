@@ -3,6 +3,7 @@
 @package ../package.json
 @group can-connect-signalr/data-interface data interface
 @group can-connect-signalr/options options
+@group can-connect-signalr/methods methods
 
 @description Connect to a
 [Hub](https://docs.microsoft.com/en-us/aspnet/signalr/overview/guide-to-the-api/hubs-api-guide-server) on a
@@ -42,6 +43,42 @@ Specifically, we will detail the:
 
 Below is a complete example of connecting a `DefineMap` model type to
 a SignalR hub.
+
+```js
+var DefineMap = require('can-define/map/map');
+var DefineList = require('can-define/list/list');
+
+var Message = DefineMap.extend({
+  body: 'string',
+  id: 'number'
+});
+
+Message.List = DefineList.extend({
+  '#': Message
+});
+
+var behaviors = [
+  require('can-connect/constructor/constructor'),
+  require('can-connect/constructor/store/store'),
+  require('can-connect/can/map/map'),
+  require('can-connect/data/callbacks/callbacks'),
+  require('can-connect/real-time/real-time'),
+  require('can-connect/constructor/callbacks-once/callbacks-once'),
+  require('can-connect-signalr') // Import the signalR Behavior
+];
+
+Message.connection = connect(behaviors, {
+  Map: Message,
+  List: Message.List,
+  signalR: {
+    url: 'http://test.com',
+    name: 'MessageHub',
+    createName: 'postMessage', // Example of overwriting a default method name.
+    createdName: "messagePosted" // Example of overwriting a default listener name.
+  }
+});
+```
+
 
 ```js
 var DefineMap = require('can-define/map/map');
@@ -113,15 +150,6 @@ delete `Message`s as follows:
   This calls `MessageHub`'s `public MessageModel messageHubDestroy( MessageModel message )` method which is expected to delete the persisted representation of the message
   and return the `Message`'s updated data. It should also notify clients that a
   message was destroyed.
-
-
-This setup also subscribes to the following messages published by the SignalR hub:
-
-- `messageHubCreatedData` - Publishes messages that are created. These events are used to call [can-connect/real-time/real-time.createInstance].
-- `messageHubUpdatedData` - Publishes messages that are updated. These events are used to call [can-connect/real-time/real-time.updateInstance].
-- `messageHubDestroyedData` - Publishes messages that are destroyed. These events are used to call [can-connect/real-time/real-time.destroyInstance].
-
-
 
 ### Hub Server Setup
 
