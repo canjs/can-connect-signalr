@@ -62,7 +62,7 @@ signalR: {
 } //-> THROWS AN ERROR
 ```
 
-@param {Set} set.
+@param {Object} instanceData The model to create.
 @return {Promise<Object>} A promise that resolves to nothing.
 
 

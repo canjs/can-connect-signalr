@@ -45,7 +45,7 @@ signalR: {
 } //-> THROWS AN ERROR
 ```
 
-@param {Object} model.
+@param {Object} instanceData The model to delete.
 @return nothing.
 
 

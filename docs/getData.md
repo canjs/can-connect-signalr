@@ -59,7 +59,7 @@ signalR: {
 } //-> BREAKS
 ```
 
-@param {Object} {id: n}.
+@param {Object} id An object with an id property.
 @return {Promise<Object>} A promise that resolves to an instance.
 
 

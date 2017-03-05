@@ -59,7 +59,7 @@ signalR: {
 } //-> THROWS AN ERROR
 ```
 
-@param {object} instanceData.
+@param {object} instanceData The model to update.
 @return {Promise<Object>} A promise that resolves to nothing.
 
 
