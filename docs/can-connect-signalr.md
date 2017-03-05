@@ -131,7 +131,7 @@ This sets up `Message` so it can retrieve, create, update and delete `Message`s 
 	    retrieves a list of messages
 	 </td>
 	 <td>
-	    This calls <code>MessageHub</code>'s '<code>public List<MessageModel> messageHubGetListData(MessageQueryParams queryParams)</code> method which is expected to return a list of matched messages.
+	    This calls <code>MessageHub</code>'s <code>public List<MessageModel> messageHubGetListData(MessageQueryParams queryParams)</code> method which is expected to return a list of matched messages.
 	 </td>
 	</tr>
 	<tr>
