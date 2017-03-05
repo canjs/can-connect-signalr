@@ -87,33 +87,107 @@ This example creates a `Message` [can-define/map/map] type and
 `Message.List` [can-define/list/list] type and connects them
 to `MessageHub` at `http://test.com`.
 
-This sets up `Message` so it can retrieve, create, update and
-delete `Message`s as follows:
+This sets up `Message` so it can retrieve, create, update and delete `Message`s as follows:
 
-- `Message.getList({due: "today"})` - retrieves a list of messages.
+<style>
+.table {
+ width: 100%;
+ border: 1px solid black;
+}
+.table td, .table th {
+ border: 1px solid black;
+ padding: 5px;
+}
+.table td:nth-child(1), .table th:nth-child(1) {
+ max-width: 350px;
+}
+.table td:nth-child(2), .table th:nth-child(2) {
+ max-width: 350px;
+ min-width: 220px;
+}
+.table td pre {
+ border: 0;
+}
+</style>
 
-  This calls `MessageHub`'s '`public List<MessageModel> messageHubGetListData(MessageQueryParams queryParams)` method which is expected to return a list of matched messages.
-
-- `Message.get({id: 5})` - gets a single message.
-
-  This calls `MessageHub`'s `public MessageModel messageHubGetData( int id )` method which is expected to return a single message.
-
-- `var message = new Message({body: "Hello World!"}).save()` - creates messages.
-
-  This calls `MessageHub`'s `public MessageModel messageHubCreate( MessageModel message )` method with the [can-define.types.serialize serialized] properties of the client message.  `MessageHubCreate` is expected to persist the message, add a unique
-  [can-connect/base/base.id] property and value, and return the `Message`'s new data. It should also notify clients that a message was created.
-
-- `message.body = "Hi there."; message.save()` - updates a message.
-
-  This calls `MessageHub`'s `public MessageModel messageHubUpdate( MessageModel message )` method which is expected to update the persisted representation of the message
-  and return the `Message`'s new data. It should also notify clients that a
-  message was updated.
-
-- `message.destroy()` - deletes a message.
-
-  This calls `MessageHub`'s `public MessageModel messageHubDestroy( MessageModel message )` method which is expected to delete the persisted representation of the message
-  and return the `Message`'s updated data. It should also notify clients that a
-  message was destroyed.
+<table class="table">
+   <thead>
+      <tr>
+         <th>Method</th>
+         <th>
+            Description
+            </th>
+         <th>
+            Details
+         </th>
+      </tr>
+   </thead>
+   <tbody>
+	<tr>
+	 <td>
+	    <pre><code>Message.getList({due: "today"});</code></pre>
+	 </td>
+	 <td>
+	    retrieves a list of messages
+	 </td>
+	 <td>
+	    This calls <code>MessageHub</code>'s '<code>public List<MessageModel> messageHubGetListData(MessageQueryParams queryParams)</code> method which is expected to return a list of matched messages.
+	 </td>
+	</tr>
+	<tr>
+	   <td>
+	      <pre><code>Message.get({id: 5});</code></pre>
+	   </td>
+	   <td>
+	      gets a single message
+	   </td>
+	   <td>
+	      This calls <code>MessageHub</code>'s <code>public MessageModel messageHubGetData( int id )</code> method which is expected to return a single message.
+	   </td>
+	</tr>
+	<tr>
+	   <td>
+	      <pre><code>var message = new Message({
+  body: "Hello World!"
+}).save();</code></pre>
+	   </td>
+	   <td>
+	      creates messages
+	   </td>
+	   <td>
+	      This calls <code>MessageHub</code>'s <code>public MessageModel messageHubCreate( MessageModel message )</code> method with the [can-define.types.serialize serialized] properties of the client message.  <code>MessageHubCreate</code> is expected to persist the message, add a unique
+            [can-connect/base/base.id] property and value, and return the <code>Message</code>'s new data. It should also notify clients that a message was created.
+	   </td>
+	</tr>
+	<tr>
+	   <td>
+	      <pre><code>message.body = "Hi there."; 
+message.save();</code></pre>
+	   </td>
+	   <td>
+	      updates a message
+	   </td>
+	   <td>
+	      This calls <code>MessageHub</code>'s <code>public MessageModel messageHubUpdate( MessageModel message )</code> method which is expected to update the persisted representation of the message
+            and return the <code>Message</code>'s new data. It should also notify clients that a
+            message was updated.
+	   </td>
+	</tr>	
+	<tr>
+	   <td>
+	      <pre><code>message.destroy();</code></pre>
+	   </td>
+	   <td>
+	      deletes a message
+	   </td>
+	   <td>
+	      This calls <code>MessageHub</code>'s <code>public MessageModel messageHubDestroy( MessageModel message )</code> method which is expected to delete the persisted representation of the message
+            and return the <code>Message</code>'s updated data. It should also notify clients that a
+            message was destroyed.
+	   </td>
+	</tr>		
+   </tbody>
+</table>
 
 ### Hub Server Setup
 
