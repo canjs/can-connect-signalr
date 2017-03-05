@@ -92,10 +92,10 @@ This sets up `Message` so it can retrieve, create, update and delete `Message`s 
 <style>
 .table {
  width: 100%;
- border: 1px solid black;
+ border: 1px solid #ccc;
 }
 .table td, .table th {
- border: 1px solid black;
+ border: 1px solid #ccc;
  padding: 5px;
 }
 .table td:nth-child(1), .table th:nth-child(1) {
