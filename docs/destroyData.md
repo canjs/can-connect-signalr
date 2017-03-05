@@ -29,9 +29,7 @@ The following call to `.destroy()` calls a `destroyTheMessage` method on the `Me
 
 ```js
 message.destroy();
-// calls MesageHub.destroyTheMessage({
-//   model: model
-// })
+// calls MesageHub.destroyTheMessage(model)
 ```
 
 The following `signalR` connection configurations call their corresponding Hubs and methods:
