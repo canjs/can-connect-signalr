@@ -47,42 +47,6 @@ a SignalR hub.
 ```js
 var DefineMap = require('can-define/map/map');
 var DefineList = require('can-define/list/list');
-
-var Message = DefineMap.extend({
-  body: 'string',
-  id: 'number'
-});
-
-Message.List = DefineList.extend({
-  '#': Message
-});
-
-var behaviors = [
-  require('can-connect/constructor/constructor'),
-  require('can-connect/constructor/store/store'),
-  require('can-connect/can/map/map'),
-  require('can-connect/data/callbacks/callbacks'),
-  require('can-connect/real-time/real-time'),
-  require('can-connect/constructor/callbacks-once/callbacks-once'),
-  require('can-connect-signalr') // Import the signalR Behavior
-];
-
-Message.connection = connect(behaviors, {
-  Map: Message,
-  List: Message.List,
-  signalR: {
-    url: 'http://test.com',
-    name: 'MessageHub',
-    createName: 'postMessage', // Example of overwriting a default method name.
-    createdName: "messagePosted" // Example of overwriting a default listener name.
-  }
-});
-```
-
-
-```js
-var DefineMap = require('can-define/map/map');
-var DefineList = require('can-define/list/list');
 var connect = require("can-connect");
 
 // Defines the Type that will be used on the client.
