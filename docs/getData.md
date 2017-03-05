@@ -3,7 +3,7 @@
 
 @description Gets an instance from the server. This is called on a constructor function by calling [getData].
 
-@signature `getData(id)`
+@signature `getData({id: 1})`
 
 Invokes the method specified by [can-connect-signalr.signalR].getData or
 [can-connect-signalr.signalR].name+"GetData" and expects the server to respond
@@ -59,7 +59,7 @@ signalR: {
 } //-> BREAKS
 ```
 
-@param {int} id.
+@param {Object} {id: n}.
 @return {Promise<Object>} A promise that resolves to an instance.
 
 
@@ -83,7 +83,7 @@ signalR: {
 You can call this method directly off of a connection:
 
 ```js
-connection.getData(id);
+connection.getData({id: 1});
 ```
 
 ## CanJS Usage

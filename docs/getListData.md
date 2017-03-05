@@ -67,7 +67,7 @@ signalR: {
 } //-> THROWS ERROR
 ```
 
-@param {object} queryParameters.
+@param {Object} queryParameters.
 @return {Promise<Object>} A promise that resolves to a list.
 
 
