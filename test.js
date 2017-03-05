@@ -23,14 +23,14 @@ $.hubConnection = function () {
         invoke: function invoke(methodName) {
           var promise;
           switch (methodName) {
-            case "messageGetList":
+            case "messageGetListData":
               promise = new Promise(function (resolve, reject) {
                 resolve([{
                   data: [testData]
                 }]);
               });
               break;
-            case "messageGet":
+            case "messageGetData":
               promise = new Promise(function (resolve, reject) {
                 resolve(testData);
               });
@@ -63,12 +63,8 @@ $.hubConnection = function () {
 };
 
 var Message = DefineMap.extend({
-  text: {
-    type: 'string'
-  },
-  id: {
-    type: 'number'
-  }
+  text: 'string',
+  id:  'number'
 });
 
 Message.List = DefineList.extend({
@@ -115,7 +111,7 @@ QUnit.test('Plugin initializes correctly', function () {
 QUnit.test('getList', function (assert) {
   var done = assert.async();
 
-  Message.getList().then(function (messages) {
+  Message.getList({}).then(function (messages) {
     assert.ok(messages, 'Got a response from findAll');
     assert.equal(messages instanceof Message.List, true, 'got a Message.List back');
     done();
