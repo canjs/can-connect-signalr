@@ -7,7 +7,7 @@
 
 Invokes the method specified by [can-connect-signalr.signalR].createName or
 [can-connect-signalr.signalR].name+"Create" and expects the server to respond
-with the created data and an [can-connect.id] property.
+with the created data and a [can-connect.id] property.
 
 ```js
 connect([
@@ -26,7 +26,7 @@ connect([
 
 ```
 
-The following call to `.save()` calls a `createTheMessage` method on the `MessageHub` hub with the message's serialized data:
+The following call to `.save()` invokes a `createTheMessage` method on the `MessageHub` hub with the message's serialized data:
 
 ```js
 new Message({
@@ -39,7 +39,7 @@ new Message({
 // })
 ```
 
-It's expected the server responds with the message data plus it's `id` like:
+The server should respond with the message data plus it's `id`:
 
 ```js
 {

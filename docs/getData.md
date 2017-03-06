@@ -26,7 +26,7 @@ connect([
 
 ```
 
-The following call to `.getData()` calls a `getTheMessage` method on the `MessageHub` hub with the provided unique message id:
+The following call to `.getData()` invokes a `getTheMessage` method on the `MessageHub` hub with the provided unique message id:
 
 ```js
 Message.getData({id: 1});

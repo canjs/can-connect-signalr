@@ -26,7 +26,7 @@ connect([
 
 ```
 
-The following call to `.getListData()` calls a `getListOfMessages` method on the `MessageHub` hub with the provided parameters:
+The following call to `.getListData()` invokes a `getListOfMessages` method on the `MessageHub` hub with the provided parameters:
 
 ```js
 Message.getListData({

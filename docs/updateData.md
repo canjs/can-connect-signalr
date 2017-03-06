@@ -26,7 +26,7 @@ connect([
 
 ```
 
-The following call to `.save()` calls an `updateTheMessage` method on the `MessageHub` hub with the message's serialized data:
+The following call to `.save()` invokes an `updateTheMessage` method on the `MessageHub` hub with the message's serialized data:
 
 ```js
 message.name = 'Brian';

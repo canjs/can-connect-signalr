@@ -25,7 +25,7 @@ connect([
 
 ```
 
-The following call to `.destroy()` calls a `destroyTheMessage` method on the `MessageHub` hub with the message model:
+The following call to `.destroy()` invokes a `destroyTheMessage` method on the `MessageHub` hub with the message model:
 
 ```js
 message.destroy();
