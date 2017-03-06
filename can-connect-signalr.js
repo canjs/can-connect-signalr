@@ -1,9 +1,5 @@
 var connect = require("can-connect");
-var $;
-try {
-  $ = require("jquery");
-} catch (e) {
-}
+var $ = require("jquery");
 require('ms-signalr-client');
 
 var camelCase = function (str) {
