@@ -3,7 +3,7 @@
 
 @description Gets an list of data from the server. This is called on a constructor function by calling [getListData].
 
-@signature `getListData(queryParams)`
+@signature `getListData(queryParameters)`
 
 Invokes the method specified by [can-connect-signalr.signalR].getListData or
 [can-connect-signalr.signalR].name+"GetListData" and expects the server to respond
@@ -57,11 +57,11 @@ It's expected that the server responds with the message list:
 The following `signalR` connection configurations call their corresponding Hubs and methods:
 
 ```
-signalR: { name: 'MessageHub' } //-> MessageHub.messageHubGetListData(messageData)
+signalR: { name: 'MessageHub' } //-> MessageHub.messageHubGetListData(queryParameters)
 signalR: {
     name: 'MessageHub',
     getListData: "getThem"
-} //-> MessageHub.getThem(messageData)
+} //-> MessageHub.getThem(queryParameters)
 signalR: {
     getListData: "getThem"
 } //-> THROWS ERROR
@@ -91,7 +91,7 @@ this property with the name expected by your `SignalR` hub.
 You can call this method directly off of a connection:
 
 ```js
-connection.getListData(queryParams);
+connection.getListData(queryParameters);
 ```
 
 ## CanJS Usage
@@ -102,5 +102,5 @@ defined on your hub to accept only one parameter. You can pass in multiple value
 an object:
 
 ```js
-Message.getListData(queryParams);
+Message.getListData(queryParameters);
 ```
