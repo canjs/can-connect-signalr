@@ -1,7 +1,7 @@
 @function can-connect-signalr/getListData getListData
 @parent can-connect-signalr/data-interface
 
-@description Gets an list of data from the server. This is called on a constructor function by calling [getListData].
+@description Gets an list of data from the server. This is invoked on a constructor function by calling [getListData].
 
 @signature `getListData(queryParameters)`
 

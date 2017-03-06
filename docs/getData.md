@@ -1,7 +1,7 @@
 @function can-connect-signalr/getData getData
 @parent can-connect-signalr/data-interface
 
-@description Gets an instance from the server. This is called on a constructor function by calling [getData].
+@description Gets an instance from the server. This is invoked on a constructor function by calling [getData].
 
 @signature `getData(id)`
 

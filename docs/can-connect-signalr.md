@@ -31,7 +31,7 @@ Encapsulates connecting to a `SignalR` hub, by:
 
 The following walks through an example setup that allows a `Message`
 type to be created, retrieved, updated and deleted by the client AND
-to be notified of when messages are created, updated, or deleted by the
+to be notified when messages are created, updated, or deleted by the
 server.
 
 Specifically, we will detail the:
@@ -42,7 +42,7 @@ Specifically, we will detail the:
 ### `can-connect` Client setup
 
 Below is a complete example of connecting a `DefineMap` model type to
-a SignalR hub.
+a SignalR hub:
 
 ```js
 var DefineMap = require('can-define/map/map');

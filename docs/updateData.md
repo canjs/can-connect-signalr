@@ -1,7 +1,7 @@
 @function can-connect-signalr/updateData updateData
 @parent can-connect-signalr/data-interface
 
-@description Updates an instance on the server.  This is called on an existing instance by calling [save].
+@description Updates an instance on the server.  This is invoked on an existing instance by calling [save].
 
 @signature `updateData(instanceData)`
 

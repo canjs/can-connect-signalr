@@ -1,7 +1,7 @@
 @function can-connect-signalr/createData createData
 @parent can-connect-signalr/data-interface
 
-@description Creates an instance on the server.  This is called on a new instance by calling [save].
+@description Creates an instance on the server.  This is invoked on a new instance by calling [save].
 
 @signature `createData(instanceData)`
 

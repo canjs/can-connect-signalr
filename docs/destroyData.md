@@ -1,7 +1,7 @@
 @function can-connect-signalr/destroyData destroyData
 @parent can-connect-signalr/data-interface
 
-@description Destroys an instance on the server.  This is called on an instance by calling [destroy].
+@description Destroys an instance on the server.  This is invoked on an instance by calling [destroy].
 
 @signature `destroyData(model)`
 
