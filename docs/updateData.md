@@ -49,11 +49,11 @@ It's expected the server responds with the message:
 The following `signalR` connection configurations call their corresponding Hubs and methods:
 
 ```
-signalR: { name: 'MessageHub' } //-> MessageHub.updateMessageHub(messageData)
+signalR: { name: 'MessageHub' } //-> MessageHub.updateMessageHub(instanceData)
 signalR: {
     name: 'MessageHub',
     updateName: "updateIt"
-} //-> MessageHub.updateIt(messageData)
+} //-> MessageHub.updateIt(instanceData)
 signalR: {
     updateName: "updateIt"
 } //-> THROWS AN ERROR
