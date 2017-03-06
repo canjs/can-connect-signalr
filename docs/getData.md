@@ -3,7 +3,7 @@
 
 @description Gets an instance from the server. This is called on a constructor function by calling [getData].
 
-@signature `getData({id: 1})`
+@signature `getData(id)`
 
 Invokes the method specified by [can-connect-signalr.signalR].getData or
 [can-connect-signalr.signalR].name+"GetData" and expects the server to respond
@@ -31,8 +31,7 @@ The following call to `.getData()` calls a `getTheMessage` method on the `Messag
 ```js
 Message.getData({id: 1});
 // calls MesageHub.getTheMessage({
-//   name: "Justin",
-//   message: "Hello World"
+//   id: 1
 // })
 ```
 
@@ -49,11 +48,11 @@ It's expected that the server responds with the message:
 The following `signalR` connection configurations call their corresponding Hubs and methods:
 
 ```
-signalR: { name: 'MessageHub' } //-> MessageHub.messageHubGetData(messageData)
+signalR: { name: 'MessageHub' } //-> MessageHub.messageHubGetData(id)
 signalR: {
     name: 'MessageHub',
     getData: "getIt"
-} //-> MessageHub.getIt(messageData)
+} //-> MessageHub.getIt(id)
 signalR: {
     getData: "getIt"
 } //-> BREAKS
