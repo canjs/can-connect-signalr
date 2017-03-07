@@ -230,7 +230,7 @@ public class MessageHub : Hub
             DELETE_FROM_DATABASE( model );
 
             // Any RPC calls to the client related to destroy go here
-            Clients.All.itemDestroyed(model);
+            Clients.All.messageDestroyed(model);
         }
 
 		// Method should take whatever data is required to obtain a list (if any)
