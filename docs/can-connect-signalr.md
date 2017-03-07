@@ -203,7 +203,7 @@ public class MessageHub : Hub
         }
 
 		// Method should take whatever data is required to create an instance
-        public MessageModel messageHubCreate( MessageModel message )
+        public MessageModel MessageHubCreate( MessageModel message )
         {
             PERSIST_TO_DATABASE( message );
 
@@ -215,7 +215,7 @@ public class MessageHub : Hub
         }
 
 		// Method should take whatever data is required to update an instance
-        public MessageModel messageHubUpdate( MessageModel message )
+        public MessageModel MessageHubUpdate( MessageModel message )
         {
             UPDATE_DATABASE( message );
 
@@ -225,7 +225,7 @@ public class MessageHub : Hub
         }
 
 		// Method should take whatever data is required to destroy an instance (usually an id)
-        public MessageModel messageDestroy( MessageModel model )
+        public MessageModel MessageDestroy( MessageModel model )
         {
             DELETE_FROM_DATABASE( model );
 
@@ -234,14 +234,14 @@ public class MessageHub : Hub
         }
 
 		// Method should take whatever data is required to obtain a list (if any)
-        public List<MessageModel> messageGetList( MessageQueryParams queryParams )
+        public List<MessageModel> MessageGetList( MessageQueryParams queryParams )
         {
             List<MessageModel> messages = GET_DATA_FROM_DATABASE( queryParams );
             return messages;
         }
 
         // Method should take whatever data is required to obtain a specific item
-        public MessageModel messageGet( int id )
+        public MessageModel MessageGet( int id )
         {
             MessageModel message = GET_RECORD_FROM_DATABASE( id );
 
