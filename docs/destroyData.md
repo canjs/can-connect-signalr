@@ -3,7 +3,7 @@
 
 @description Destroys an instance on the server.  This is invoked on an instance by calling [destroy].
 
-@signature `destroyData(model)`
+@signature `destroyData(instanceData)`
 
 Invokes the method specified by [can-connect-signalr.signalR].destroyName or
 [can-connect-signalr.signalR].name+"Destroy".
@@ -29,17 +29,17 @@ The following call to `.destroy()` invokes a `destroyTheMessage` method on the `
 
 ```js
 message.destroy();
-// calls MesageHub.destroyTheMessage(model)
+// calls MesageHub.destroyTheMessage(instanceData)
 ```
 
 The following `signalR` connection configurations call their corresponding Hubs and methods:
 
 ```
-signalR: { name: 'MessageHub' } //-> MessageHub.messageHubDestroy(model)
+signalR: { name: 'MessageHub' } //-> MessageHub.messageHubDestroy(instanceData)
 signalR: {
     name: 'MessageHub',
     destroyName: "destroyIt"
-} //-> MessageHub.destroyIt(model)
+} //-> MessageHub.destroyIt(instanceData)
 signalR: {
     destroyName: "destroyIt"
 } //-> THROWS AN ERROR
@@ -69,7 +69,7 @@ signalR: {
 You can call this method directly off of a connection:
 
 ```js
-connection.destroyData(model);
+connection.destroyData(instanceData);
 ```
 
 ## CanJS Usage
