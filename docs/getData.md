@@ -29,10 +29,8 @@ connect([
 The following call to `.getData()` invokes a `getTheMessage` method on the `MessageHub` hub with the provided unique message id:
 
 ```js
-Message.getData({id: 1});
-// calls MesageHub.getTheMessage({
-//   id: 1
-// })
+Message.getData(1);
+// calls MesageHub.getTheMessage(1)
 ```
 
 It's expected that the server responds with the message:
@@ -58,7 +56,7 @@ signalR: {
 } //-> BREAKS
 ```
 
-@param {Object} id An object with an id property.
+@param {number} id A unique id.
 @return {Promise<Object>} A promise that resolves to an instance.
 
 
@@ -82,7 +80,7 @@ signalR: {
 You can call this method directly off of a connection:
 
 ```js
-connection.getData({id: 1});
+connection.getData(1);
 ```
 
 ## CanJS Usage
@@ -93,5 +91,5 @@ defined on your hub to accept only one parameter. You can pass in multiple value
 an object:
 
 ```js
-Message.getData({id: 1});
+Message.getData(1);
 ```

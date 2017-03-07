@@ -225,12 +225,12 @@ public class MessageHub : Hub
         }
 
 		// Method should take whatever data is required to destroy an instance (usually an id)
-        public MessageModel messageDestroy( int id )
+        public MessageModel messageDestroy( MessageModel model )
         {
-            DELETE_FROM_DATABASE( id );
+            DELETE_FROM_DATABASE( model );
 
             // Any RPC calls to the client related to destroy go here
-            Clients.All.itemDestroyed(id);
+            Clients.All.itemDestroyed(model);
         }
 
 		// Method should take whatever data is required to obtain a list (if any)
