@@ -29,17 +29,17 @@ The following call to `.destroy()` invokes a `destroyTheMessage` method on the `
 
 ```js
 message.destroy();
-// calls MesageHub.destroyTheMessage(instanceData)
+// calls MesageHub.destroyTheMessage(message)
 ```
 
 The following `signalR` connection configurations call their corresponding Hubs and methods:
 
 ```
-signalR: { name: 'MessageHub' } //-> MessageHub.messageHubDestroy(instanceData)
+signalR: { name: 'MessageHub' } //-> MessageHub.messageHubDestroy(message)
 signalR: {
     name: 'MessageHub',
     destroyName: "destroyIt"
-} //-> MessageHub.destroyIt(instanceData)
+} //-> MessageHub.destroyIt(message)
 signalR: {
     destroyName: "destroyIt"
 } //-> THROWS AN ERROR
