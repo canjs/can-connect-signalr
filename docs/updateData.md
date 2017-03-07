@@ -49,11 +49,11 @@ It's expected the server responds with the message:
 The following `signalR` connection configurations call their corresponding Hubs and methods:
 
 ```
-signalR: { name: 'MessageHub' } //-> MessageHub.updateMessageHub(instanceData)
+signalR: { name: 'MessageHub' } //-> MessageHub.updateMessageHub(message)
 signalR: {
     name: 'MessageHub',
     updateName: "updateIt"
-} //-> MessageHub.updateIt(instanceData)
+} //-> MessageHub.updateIt(message)
 signalR: {
     updateName: "updateIt"
 } //-> THROWS AN ERROR
@@ -83,7 +83,7 @@ signalR: {
 You can call this method directly off of a connection:
 
 ```js
-connection.updateData(instanceData);
+connection.updateData(message);
 ```
 
 ## CanJS Usage
