@@ -52,11 +52,11 @@ The server should respond with the message data plus it's `id`:
 The following `signalR` connection configurations call their corresponding Hubs and methods:
 
 ```
-signalR: { name: 'MessageHub' } //-> MessageHub.createMessageHub(messageData)
+signalR: { name: 'MessageHub' } //-> MessageHub.createMessageHub(instanceData)
 signalR: {
     name: 'MessageHub',
     createName: "createIt"
-} //-> MessageHub.createIt(messageData)
+} //-> MessageHub.createIt(instanceData)
 signalR: {
     createName: "createIt"
 } //-> THROWS AN ERROR
