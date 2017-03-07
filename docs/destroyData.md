@@ -69,7 +69,7 @@ signalR: {
 You can call this method directly off of a connection:
 
 ```js
-connection.destroyData(instanceData);
+connection.destroyData(message);
 ```
 
 ## CanJS Usage

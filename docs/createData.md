@@ -52,11 +52,11 @@ The server should respond with the message data plus it's `id`:
 The following `signalR` connection configurations call their corresponding Hubs and methods:
 
 ```
-signalR: { name: 'MessageHub' } //-> MessageHub.createMessageHub(instanceData)
+signalR: { name: 'MessageHub' } //-> MessageHub.createMessageHub(message)
 signalR: {
     name: 'MessageHub',
     createName: "createIt"
-} //-> MessageHub.createIt(instanceData)
+} //-> MessageHub.createIt(message)
 signalR: {
     createName: "createIt"
 } //-> THROWS AN ERROR
@@ -86,7 +86,7 @@ this property with the name expected by your `SignalR` hub.
 You can call this method directly off of a connection:
 
 ```js
-connection.createData(instanceData);
+connection.createData(message);
 ```
 
 ## CanJS Usage
