@@ -25,7 +25,7 @@ module.exports = connect.behavior('can-connect-signalr', function signalR(baseCo
         var name = signalR.name.toLowerCase();
 
         signalR.connection = $.hubConnection(signalR.url);
-        signalR.proxy = signalR.connection.createHubProxy(signalR.name + 'Hub');
+        signalR.proxy = signalR.connection.createHubProxy(signalR.name);
 
         signalR.proxy.on((signalR.createdName || name + "Created"), function (item) {
           context.createInstance(item);
