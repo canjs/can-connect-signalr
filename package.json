@@ -1,6 +1,6 @@
 {
   "name": "can-connect-signalr",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "can-connect-signalr",
   "description": "can-connect-signalr is a set of behaviors for integrating can-connect with Microsoft's signalR",
   "scripts": {
