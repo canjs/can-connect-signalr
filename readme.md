@@ -1,5 +1,7 @@
 # can-connect-signalr
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/canjs/can-connect-signalr.svg)](https://greenkeeper.io/)
+
 [![Build Status](https://travis-ci.org/canjs/can-connect-signalr.png?branch=master)](https://travis-ci.org/canjs/can-connect-signalr)
 
 `can-connect-signalr` is a set of behaviors for integrating [can-connect](http://canjs.com/doc/can-connect.html) with Microsoft's [SignalR](http://signalr.net/).
