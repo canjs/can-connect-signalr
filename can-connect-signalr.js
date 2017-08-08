@@ -54,7 +54,6 @@ module.exports = connect.behavior('can-connect-signalr', function signalR(baseCo
          */
         signalR.connection.start()
           .done(function () {
-            console.log('Connected: ' + signalR.connection.id);
             resolve(signalR);
           })
           .fail(reject);
