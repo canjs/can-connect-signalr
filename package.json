@@ -12,7 +12,6 @@
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",
-    "document": "bit-docs",
     "develop": "done-serve --static --develop --port 8080"
   },
   "keywords": [],
