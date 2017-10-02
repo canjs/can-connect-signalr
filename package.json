@@ -6,13 +6,14 @@
   "scripts": {
     "preversion": "npm test",
     "testee": "testee test.html --browsers firefox",
-    "test": "npm run jshint && npm run testee",
+    "test": "npm run detect-cycle && npm run jshint && npm run testee",
     "jshint": "jshint ./*.js --config",
     "release:pre": "npm version prerelease && npm publish --tag=pre",
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",
-    "develop": "done-serve --static --develop --port 8080"
+    "develop": "done-serve --static --develop --port 8080",
+    "detect-cycle": "detect-cyclic-packages"
   },
   "keywords": [],
   "repository": "https://github.com/canjs/can-connect-signalr",
@@ -29,6 +30,7 @@
   },
   "devDependencies": {
     "can-define": "^1.2.0",
+    "detect-cyclic-packages": "^1.0.0",
     "jshint": "^2.9.1",
     "steal": "^1.5.2",
     "steal-qunit": "^1.0.1",
