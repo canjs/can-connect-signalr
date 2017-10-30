@@ -1,5 +1,6 @@
 @module {function} can-connect-signalr
-@parent can-ecosystem
+@parent can-data-modeling
+@collection can-ecosystem
 @package ../package.json
 @group can-connect-signalr/data-interface data interface
 @group can-connect-signalr/options options
