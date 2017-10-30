@@ -72,6 +72,7 @@ Message.List = DefineList.extend({
 });
 
 /**
+ * @hide
  * @desc A piece of sample data for use in the tests
  * @type {{text: string, id: number}}
  */
