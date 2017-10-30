@@ -3,6 +3,7 @@ var $ = require("jquery");
 require('ms-signalr-client');
 
 /**
+ * @hide
  * @desc Converts a string in TitleCase to camelCase
  * @param str
  * @returns {string}
