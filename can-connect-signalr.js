@@ -64,6 +64,7 @@ module.exports = connect.behavior('can-connect-signalr', function signalR(baseCo
      * @desc Creates an instance on the Hub
      * @param props
      * @returns {Promise}
+     * @hide
      */
     createData: function (props) {
       return this.signalR.ready.then(function (signalR) {
@@ -74,6 +75,7 @@ module.exports = connect.behavior('can-connect-signalr', function signalR(baseCo
      * @desc Updates an instance on the Hub
      * @param props
      * @returns {Promise}
+     * @hide
      */
     updateData: function (props) {
       return this.signalR.ready.then(function (signalR) {
@@ -84,6 +86,7 @@ module.exports = connect.behavior('can-connect-signalr', function signalR(baseCo
      * @desc Destroys an instance on the Hub
      * @param props
      * @returns {Promise}
+     * @hide
      */
     destroyData: function (props) {
       return this.signalR.ready.then(function (signalR) {
@@ -94,6 +97,7 @@ module.exports = connect.behavior('can-connect-signalr', function signalR(baseCo
      * @desc Gets a collection of data instances from the Hub
      * @param set
      * @returns {Promise}
+     * @hide
      */
     getListData: function (set) {
       return this.signalR.ready.then(function (signalR) {
@@ -104,6 +108,7 @@ module.exports = connect.behavior('can-connect-signalr', function signalR(baseCo
      * @desc Gets a single instance of data from the Hub
      * @param set
      * @returns {Promise}
+     * @hide
      */
     get: function (set) {
       return this.signalR.ready.then(function (signalR) {
