@@ -45,15 +45,15 @@ Specifically, we will detail the:
 Below is a complete example of connecting a `DefineMap` model type to
 a SignalR hub:
 
-```js
-var DefineMap = require('can-define/map/map');
-var DefineList = require('can-define/list/list');
-var connect = require("can-connect");
+```javascript
+import DefineMap from 'can-define/map/map';
+import DefineList from 'can-define/list/list';
+import connect from "can-connect";
 
 // Defines the Type that will be used on the client.
-var Message = DefineMap.extend({
-	body: 'string',
-	id: 'number'
+const Message = DefineMap.extend({
+  body: 'string',
+  id: 'number'
 });
 
 // Defines a List type that contains instances of the
@@ -63,24 +63,24 @@ Message.List = DefineList.extend({
 });
 
 // The minimal behaviors used to create the connection
-var behaviors = [
-	require('can-connect/constructor/constructor'),
-	require('can-connect/constructor/store/store'),
-	require('can-connect/can/map/map'),
-	require('can-connect/data/callbacks/callbacks'),
-	require('can-connect/real-time/real-time'),
-	require('can-connect/constructor/callbacks-once/callbacks-once'),
-	require('can-connect-signalr') // Import the signalR Behavior
+const behaviors = [
+  require('can-connect/constructor/constructor'),
+  require('can-connect/constructor/store/store'),
+  require('can-connect/can/map/map'),
+  require('can-connect/data/callbacks/callbacks'),
+  require('can-connect/real-time/real-time'),
+  require('can-connect/constructor/callbacks-once/callbacks-once'),
+  require('can-connect-signalr') // Import the signalR Behavior
 ];
 
 // Connects the types to the SignalR server
 Message.connection = connect(behaviors, {
-	Map: Message,
-	List: Message.List,
-	signalR: {
-		url: 'http://test.com',
-		name: 'MessageHub'
-	}
+  Map: Message,
+  List: Message.List,
+  signalR: {
+    url: 'http://test.com',
+    name: 'MessageHub'
+  }
 });
 ```
 

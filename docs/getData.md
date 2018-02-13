@@ -9,11 +9,11 @@ Invokes the method specified by [can-connect-signalr.signalR].getData or
 [can-connect-signalr.signalR].name+"GetData" and expects the server to respond
 with the data.
 
-```js
+```javascript
 connect([
-  ...
+  // ...
   require("can-connect-signalr"),
-  ...
+  // ...
 ], {
   signalR: {
     url: 'http://test.com', // URL of the SignalR server
@@ -21,14 +21,14 @@ connect([
     getData: 'getTheMessage'
   },
   Map: Message,
-  ...
+  // ...
 });
 
 ```
 
 The following call to `.getData()` invokes a `getTheMessage` method on the `MessageHub` hub with the provided unique message id:
 
-```js
+```javascript
 Message.getData(1);
 // calls MesageHub.getTheMessage(1)
 ```
@@ -69,7 +69,7 @@ do to configure this method on the client. If the method name of the `get` end p
 the standard expected by `can-connect-signalr`, you can override `can-connect-signalr`'s default naming by providing
 this property with the name expected by your `SignalR` hub.
 
-```js
+```javascript
 {
   signalR: {
     url: 'http://test.com', // URL of the SignalR server
@@ -81,7 +81,7 @@ this property with the name expected by your `SignalR` hub.
 
 You can call this method directly off of a connection:
 
-```js
+```javascript
 connection.getData(1);
 ```
 
@@ -92,6 +92,6 @@ If your connection is mixed in to a `DefineMap` (see [can-connect-signalr]), `ge
 defined on your hub to accept only one parameter. You can pass in multiple values by sending the method
 an object:
 
-```js
+```javascript
 Message.getData(1);
 ```

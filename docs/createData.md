@@ -9,11 +9,11 @@ Invokes the method specified by [can-connect-signalr.signalR].createName or
 [can-connect-signalr.signalR].name+"Create" and expects the server to respond
 with the created data and a [can-connect.id] property.
 
-```js
+```javascript
 connect([
-  ...
+  // ...
   require("can-connect-signalr"),
-  ...
+  // ...
 ], {
   signalR: {
     url: 'http://test.com', // URL of the SignalR server
@@ -21,14 +21,14 @@ connect([
     createName: 'createTheMessage'
   },
   Map: Message,
-  ...
+  // ...
 });
 
 ```
 
 The following call to `.save()` invokes a `createTheMessage` method on the `MessageHub` hub with the message's serialized data:
 
-```js
+```javascript
 new Message({
     name: "Justin",
     message: "Hello World"
@@ -41,7 +41,7 @@ new Message({
 
 The server should respond with the message data plus it's `id`:
 
-```js
+```javascript
 {
   "id": 1,
   "name": "Justin",
@@ -75,7 +75,7 @@ do to configure this method on the client. If the method name of the `create` en
 the standard expected by `can-connect-signalr`, you can override `can-connect-signalr`'s default naming by providing
 this property with the name expected by your `SignalR` hub.
 
-```js
+```javascript
 {
   signalR: {
       url: 'http://test.com', // URL of the SignalR server
@@ -87,7 +87,7 @@ this property with the name expected by your `SignalR` hub.
 
 You can call this method directly off of a connection:
 
-```js
+```javascript
 connection.createData(message);
 ```
 
@@ -98,11 +98,11 @@ If your connection is mixed in to a `DefineMap` (see [can-connect-signalr]), `cr
 defined on your hub to accept only one parameter. You can pass in multiple values by sending the method
 an object:
 
-```js
+```javascript
 // returns a promise that will be resolved once data is received by the Hub.
 // Note: Data returned from the Hub will be received in the proxy listener.
 new Message({
-	text: 'Hi there!'
+  text: 'Hi there!'
 }).save();
 ```
 
