@@ -9,26 +9,26 @@ Invokes the method specified by [can-connect-signalr.signalR].updateName or
 [can-connect-signalr.signalR].name+"Update" and expects the server to respond
 with the updated data.
 
-```javascript
+```js
 connect([
-  // ...
-  require("can-connect-signalr"),
-  // ...
+	// ...
+	require("can-connect-signalr"),
+	// ...
 ], {
-  signalR: {
-    url: 'http://test.com', // URL of the SignalR server
-    name: 'MessageHub',     // Name of the SignalR hub,
-    updateName: 'updateTheMessage'
-  },
-  Map: Message,
-  // ...
+	signalR: {
+		url: 'http://test.com', // URL of the SignalR server
+		name: 'MessageHub',     // Name of the SignalR hub,
+		updateName: 'updateTheMessage'
+	},
+	Map: Message,
+	// ...
 });
 
 ```
 
 The following call to `.save()` invokes an `updateTheMessage` method on the `MessageHub` hub with the message's serialized data:
 
-```javascript
+```js
 message.name = 'Brian';
 message.save();
 // calls MesageHub.updateTheMessage({
@@ -72,19 +72,19 @@ do to configure this method on the client. If the method name of the `update` en
 the standard expected by `can-connect-signalr`, you can override `can-connect-signalr`'s default naming by providing
 this property with the name expected by your `SignalR` hub.
 
-```javascript
+```js
 {
-  signalR: {
-    url: 'http://test.com', // URL of the SignalR server
-    name: 'MessageHub',     // Name of the SignalR hub,
-    updateName: 'nameOfMethod'
-  }
+	signalR: {
+		url: 'http://test.com', // URL of the SignalR server
+		name: 'MessageHub',     // Name of the SignalR hub,
+		updateName: 'nameOfMethod'
+	}
 }
 ```
 
 You can call this method directly off of a connection:
 
-```javascript
+```js
 connection.updateData(message);
 ```
 
@@ -95,7 +95,7 @@ If your connection is mixed in to a `DefineMap` (see [can-connect-signalr]), `up
 defined on your hub to accept only one parameter. You can pass in multiple values by sending the method
 an object:
 
-```javascript
+```js
 message.name = 'Brian';
 message.save();
 ```

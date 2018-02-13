@@ -8,26 +8,26 @@
 Invokes the method specified by [can-connect-signalr.signalR].destroyName or
 [can-connect-signalr.signalR].name+"Destroy".
 
-```javascript
+```js
 connect([
-  // ...
-  require("can-connect-signalr"),
-  // ...
+	// ...
+	require("can-connect-signalr"),
+	// ...
 ], {
-  signalR: {
-    url: 'http://test.com', // URL of the SignalR server
-    name: 'MessageHub', // Name of the SignalR hub,
-    destroyName: 'destroyTheMessage'
-  },
-  Map: Message,
-  // ...
+	signalR: {
+		url: 'http://test.com', // URL of the SignalR server
+		name: 'MessageHub', // Name of the SignalR hub,
+		destroyName: 'destroyTheMessage'
+	},
+	Map: Message,
+	// ...
 });
 
 ```
 
 The following call to `.destroy()` invokes a `destroyTheMessage` method on the `MessageHub` hub with the message model:
 
-```javascript
+```js
 message.destroy();
 // calls MesageHub.destroyTheMessage(message)
 ```
@@ -58,19 +58,19 @@ do to configure this method on the client. If the method name of the `destroy` e
 the standard expected by `can-connect-signalr`, you can override `can-connect-signalr`'s default naming by providing
 this property with the name expected by your `SignalR` hub.
 
-```javascript
+```js
 {
-  signalR: {
-    url: 'http://test.com', // URL of the SignalR server
-    name: 'MessageHub',     // Name of the SignalR hub,
-    destroyName: 'nameOfMethod'
-  }
+	signalR: {
+		url: 'http://test.com', // URL of the SignalR server
+		name: 'MessageHub',     // Name of the SignalR hub,
+		destroyName: 'nameOfMethod'
+	}
 }
 ```
 
 You can call this method directly off of a connection:
 
-```javascript
+```js
 connection.destroyData(message);
 ```
 
@@ -81,7 +81,7 @@ If your connection is mixed in to a `DefineMap` (see [can-connect-signalr]), `de
 defined on your hub to accept only one parameter. You can pass in multiple values by sending the method
 an object:
 
-```javascript
+```js
 message.destroy();
 ```
 
