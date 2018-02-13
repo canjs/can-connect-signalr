@@ -17,7 +17,7 @@ connect([
 ], {
   signalR: {
     url: 'http://test.com', // URL of the SignalR server
-    name: 'MessageHub', // Name of the SignalR hub,
+    name: 'MessageHub',     // Name of the SignalR hub,
     getListData: 'getMessages'
   },
   Map: Message,
@@ -39,18 +39,18 @@ Message.getListData({
 
 It's expected that the server responds with the message list:
 
-```js
+```json
 [
- {
-   "id": 1,
-   "name": "Johnson",
-   "message": "Hello World"
- },
- {
-   "id": 2,
-   "name": "Johnson",
-   "message": "Hello again World"
- }
+  {
+    "id": 1,
+    "name": "Johnson",
+    "message": "Hello World"
+  },
+  {
+    "id": 2,
+    "name": "Johnson",
+    "message": "Hello again World"
+  }
 ]
 ```
 
@@ -81,11 +81,13 @@ the standard expected by `can-connect-signalr`, you can override `can-connect-si
 this property with the name expected by your `SignalR` hub.
 
 ```js
+{
     signalR: {
         url: 'http://test.com', // URL of the SignalR server
-        name: 'MessageHub' // Name of the SignalR hub,
+        name: 'MessageHub',     // Name of the SignalR hub,
         getListData: 'nameOfMethod'
     }
+}
 ```
 
 You can call this method directly off of a connection:
