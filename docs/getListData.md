@@ -10,28 +10,32 @@ Invokes the method specified by [can-connect-signalr.signalR].getListData or
 with the data.
 
 ```js
-connect([
+connect( [
+
 	// ...
-	require("can-connect-signalr"),
+	require( "can-connect-signalr" )
+
 	// ...
 ], {
 	signalR: {
-		url: 'http://test.com', // URL of the SignalR server
-		name: 'MessageHub',     // Name of the SignalR hub,
-		getListData: 'getMessages'
+		url: "http://test.com", // URL of the SignalR server
+		name: "MessageHub",     // Name of the SignalR hub,
+		getListData: "getMessages"
 	},
-	Map: Message,
+	Map: Message
+
 	// ...
-});
+} );
 
 ```
 
 The following call to `.getListData()` invokes a `getListOfMessages` method on the `MessageHub` hub with the provided parameters:
 
 ```js
-Message.getListData({
-	name: 'Johnson'
-});
+Message.getListData( {
+	name: "Johnson"
+} );
+
 // calls MesageHub.getListOfMessages({
 //   name: 'Johnson'
 // })
@@ -83,9 +87,9 @@ this property with the name expected by your `SignalR` hub.
 ```js
 {
 	signalR: {
-		url: 'http://test.com', // URL of the SignalR server
-		name: 'MessageHub',     // Name of the SignalR hub,
-		getListData: 'nameOfMethod'
+		url: "http://test.com", // URL of the SignalR server
+		name: "MessageHub",     // Name of the SignalR hub,
+		getListData: "nameOfMethod"
 	}
 }
 ```
@@ -93,7 +97,7 @@ this property with the name expected by your `SignalR` hub.
 You can call this method directly off of a connection:
 
 ```js
-connection.getListData(queryParameters);
+connection.getListData( queryParameters );
 ```
 
 ## CanJS Usage
@@ -104,5 +108,5 @@ defined on your hub to accept only one parameter. You can pass in multiple value
 an object:
 
 ```js
-Message.getListData(queryParameters);
+Message.getListData( queryParameters );
 ```

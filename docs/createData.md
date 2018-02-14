@@ -10,29 +10,33 @@ Invokes the method specified by [can-connect-signalr.signalR].createName or
 with the created data and a [can-connect.id] property.
 
 ```js
-connect([
+connect( [
+
 	// ...
-	require("can-connect-signalr"),
+	require( "can-connect-signalr" )
+
 	// ...
 ], {
 	signalR: {
-		url: 'http://test.com', // URL of the SignalR server
-		name: 'MessageHub', // Name of the SignalR hub,
-		createName: 'createTheMessage'
+		url: "http://test.com", // URL of the SignalR server
+		name: "MessageHub", // Name of the SignalR hub,
+		createName: "createTheMessage"
 	},
-	Map: Message,
+	Map: Message
+
 	// ...
-});
+} );
 
 ```
 
 The following call to `.save()` invokes a `createTheMessage` method on the `MessageHub` hub with the message's serialized data:
 
 ```js
-new Message({
+new Message( {
 	name: "Justin",
 	message: "Hello World"
-}).save()
+} ).save();
+
 // calls MesageHub.createTheMessage({
 //   name: "Justin",
 //   message: "Hello World"
@@ -78,9 +82,9 @@ this property with the name expected by your `SignalR` hub.
 ```js
 {
 	signalR: {
-		url: 'http://test.com', // URL of the SignalR server
-		name: 'MessageHub', // Name of the SignalR hub,
-		createName: 'nameOfMethod'
+		url: "http://test.com", // URL of the SignalR server
+		name: "MessageHub", // Name of the SignalR hub,
+		createName: "nameOfMethod"
 	}
 }
 ```
@@ -88,7 +92,7 @@ this property with the name expected by your `SignalR` hub.
 You can call this method directly off of a connection:
 
 ```js
-connection.createData(message);
+connection.createData( message );
 ```
 
 ## CanJS Usage
@@ -101,9 +105,9 @@ an object:
 ```js
 // returns a promise that will be resolved once data is received by the Hub.
 // Note: Data returned from the Hub will be received in the proxy listener.
-new Message({
-	text: 'Hi there!'
-}).save();
+new Message( {
+	text: "Hi there!"
+} ).save();
 ```
 
 While `createData` returns a `Promise`, that promise does not contain an instance of the created object. That

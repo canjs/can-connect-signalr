@@ -10,27 +10,31 @@ Invokes the method specified by [can-connect-signalr.signalR].updateName or
 with the updated data.
 
 ```js
-connect([
+connect( [
+
 	// ...
-	require("can-connect-signalr"),
+	require( "can-connect-signalr" )
+
 	// ...
 ], {
 	signalR: {
-		url: 'http://test.com', // URL of the SignalR server
-		name: 'MessageHub',     // Name of the SignalR hub,
-		updateName: 'updateTheMessage'
+		url: "http://test.com", // URL of the SignalR server
+		name: "MessageHub",     // Name of the SignalR hub,
+		updateName: "updateTheMessage"
 	},
-	Map: Message,
+	Map: Message
+
 	// ...
-});
+} );
 
 ```
 
 The following call to `.save()` invokes an `updateTheMessage` method on the `MessageHub` hub with the message's serialized data:
 
 ```js
-message.name = 'Brian';
+message.name = "Brian";
 message.save();
+
 // calls MesageHub.updateTheMessage({
 //   name: "Brian"
 // })
@@ -75,9 +79,9 @@ this property with the name expected by your `SignalR` hub.
 ```js
 {
 	signalR: {
-		url: 'http://test.com', // URL of the SignalR server
-		name: 'MessageHub',     // Name of the SignalR hub,
-		updateName: 'nameOfMethod'
+		url: "http://test.com", // URL of the SignalR server
+		name: "MessageHub",     // Name of the SignalR hub,
+		updateName: "nameOfMethod"
 	}
 }
 ```
@@ -85,7 +89,7 @@ this property with the name expected by your `SignalR` hub.
 You can call this method directly off of a connection:
 
 ```js
-connection.updateData(message);
+connection.updateData( message );
 ```
 
 ## CanJS Usage
@@ -96,7 +100,7 @@ defined on your hub to accept only one parameter. You can pass in multiple value
 an object:
 
 ```js
-message.name = 'Brian';
+message.name = "Brian";
 message.save();
 ```
 
