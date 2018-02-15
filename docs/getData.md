@@ -10,32 +10,36 @@ Invokes the method specified by [can-connect-signalr.signalR].getData or
 with the data.
 
 ```js
-connect([
-  ...
-  require("can-connect-signalr"),
-  ...
+connect( [
+
+	// ...
+	require( "can-connect-signalr" )
+
+	// ...
 ], {
-  signalR: {
-    url: 'http://test.com', // URL of the SignalR server
-    name: 'MessageHub', // Name of the SignalR hub,
-    getData: 'getTheMessage'
-  },
-  Map: Message,
-  ...
-});
+	signalR: {
+		url: "http://test.com", // URL of the SignalR server
+		name: "MessageHub",     // Name of the SignalR hub,
+		getData: "getTheMessage"
+	},
+	Map: Message
+
+	// ...
+} );
 
 ```
 
 The following call to `.getData()` invokes a `getTheMessage` method on the `MessageHub` hub with the provided unique message id:
 
 ```js
-Message.getData(1);
+Message.getData( 1 );
+
 // calls MesageHub.getTheMessage(1)
 ```
 
 It's expected that the server responds with the message:
 
-```js
+```json
 {
   "id": 1,
   "name": "Justin",
@@ -70,17 +74,19 @@ the standard expected by `can-connect-signalr`, you can override `can-connect-si
 this property with the name expected by your `SignalR` hub.
 
 ```js
-signalR: {
-  url: 'http://test.com', // URL of the SignalR server
-  name: 'MessageHub' // Name of the SignalR hub,
-  getData: 'nameOfMethod'
+{
+	signalR: {
+		url: "http://test.com", // URL of the SignalR server
+		name: "MessageHub",     // Name of the SignalR hub,
+		getData: "nameOfMethod"
+	}
 }
 ```
 
 You can call this method directly off of a connection:
 
 ```js
-connection.getData(1);
+connection.getData( 1 );
 ```
 
 ## CanJS Usage
@@ -91,5 +97,5 @@ defined on your hub to accept only one parameter. You can pass in multiple value
 an object:
 
 ```js
-Message.getData(1);
+Message.getData( 1 );
 ```

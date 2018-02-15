@@ -9,19 +9,22 @@ Invokes the method specified by [can-connect-signalr.signalR].destroyName or
 [can-connect-signalr.signalR].name+"Destroy".
 
 ```js
-connect([
-  ...
-  require("can-connect-signalr"),
-  ...
+connect( [
+
+	// ...
+	require( "can-connect-signalr" )
+
+	// ...
 ], {
-  signalR: {
-    url: 'http://test.com', // URL of the SignalR server
-    name: 'MessageHub', // Name of the SignalR hub,
-    destroyName: 'destroyTheMessage'
-  },
-  Map: Message,
-  ...
-});
+	signalR: {
+		url: "http://test.com", // URL of the SignalR server
+		name: "MessageHub", // Name of the SignalR hub,
+		destroyName: "destroyTheMessage"
+	},
+	Map: Message
+
+	// ...
+} );
 
 ```
 
@@ -29,6 +32,7 @@ The following call to `.destroy()` invokes a `destroyTheMessage` method on the `
 
 ```js
 message.destroy();
+
 // calls MesageHub.destroyTheMessage(message)
 ```
 
@@ -59,17 +63,19 @@ the standard expected by `can-connect-signalr`, you can override `can-connect-si
 this property with the name expected by your `SignalR` hub.
 
 ```js
-signalR: {
-  url: 'http://test.com', // URL of the SignalR server
-  name: 'MessageHub' // Name of the SignalR hub,
-  destroyName: 'nameOfMethod'
+{
+	signalR: {
+		url: "http://test.com", // URL of the SignalR server
+		name: "MessageHub",     // Name of the SignalR hub,
+		destroyName: "nameOfMethod"
+	}
 }
 ```
 
 You can call this method directly off of a connection:
 
 ```js
-connection.destroyData(message);
+connection.destroyData( message );
 ```
 
 ## CanJS Usage
