@@ -5,6 +5,8 @@
   "description": "can-connect-signalr is a set of behaviors for integrating can-connect with Microsoft's signalR",
   "scripts": {
     "preversion": "npm test",
+    "version": "git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/",
+    "postversion": "git push --tags && git checkout - && git branch -D release && git push",
     "testee": "testee test.html --browsers firefox",
     "test": "npm run detect-cycle && npm run jshint && npm run testee",
     "jshint": "jshint ./*.js --config",
