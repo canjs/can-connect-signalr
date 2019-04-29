@@ -105,8 +105,8 @@ QUnit.module('can-connect-signalr', {
   }
 });
 
-QUnit.test('Plugin initializes correctly', function () {
-  QUnit.equal(Message.connection.__behaviorName, 'can-connect-signalr');
+QUnit.test('Plugin initializes correctly', function(assert) {
+  assert.equal(Message.connection.__behaviorName, 'can-connect-signalr');
 });
 
 QUnit.test('getList', function (assert) {
