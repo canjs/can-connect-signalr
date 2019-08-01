@@ -31,7 +31,7 @@
     "ms-signalr-client": "^2.2.5"
   },
   "devDependencies": {
-    "can-define": "^1.2.0",
+    "can-define": "^2.7.21",
     "detect-cyclic-packages": "^1.1.0",
     "jshint": "^2.9.1",
     "steal": "^1.5.2",
