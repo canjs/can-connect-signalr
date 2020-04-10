@@ -27,7 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "can-connect": "^1.5.0",
-    "jquery": "2.x - 3.x",
+    "jquery": "3.5.0",
     "ms-signalr-client": "^2.2.5"
   },
   "devDependencies": {
